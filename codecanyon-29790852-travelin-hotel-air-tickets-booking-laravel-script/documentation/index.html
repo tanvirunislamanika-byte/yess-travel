@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel In - Complete Documentation v4.1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.25);
+            padding: 10px 25px;
+            border-radius: 30px;
+            margin-top: 15px;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .alert {
+            background: #ffe5e5;
+            color: #721c24;
+            padding: 20px 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 5px solid #dc3545;
+            box-shadow: 0 2px 10px rgba(220, 53, 69, 0.1);
+        }
+
+        .container {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+            min-height: calc(100vh - 250px);
+        }
+
+        .sidebar {
+            width: 320px;
+            background: white;
+            padding: 30px 0;
+            box-shadow: 3px 0 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            height: calc(100vh - 250px);
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            padding: 0 30px 20px 30px;
+            color: #667eea;
+            font-size: 1.2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #e9ecef;
+            margin-bottom: 15px;
+        }
+
+        .nav-item {
+            padding: 15px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #495057;
+            font-size: 0.98em;
+        }
+
+        .nav-item:hover {
+            background: linear-gradient(90deg, #f8f9ff 0%, #ffffff 100%);
+            border-left-color: #667eea;
+            color: #667eea;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, #ece9ff 0%, #f8f9ff 100%);
+            border-left-color: #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .nav-icon {
+            font-size: 1.3em;
+            width: 28px;
+            text-align: center;
+        }
+
+        .content {
+            flex: 1;
+            padding: 50px 60px;
+            background: white;
+            margin: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.6s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 4px solid #ece9ff;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        h4 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 18px;
+            color: #555;
+            line-height: 2;
+            font-size: 1.08em;
+        }
+
+        code {
+            background: #f8f9fa;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #e83e8c;
+            font-size: 0.95em;
+            border: 1px solid #e9ecef;
+        }
+
+        pre {
+            background: #2d3748;
+            color: #f7fafc;
+            padding: 30px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 30px 0;
+            border-left: 6px solid #667eea;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        pre code {
+            background: none;
+            color: #f7fafc;
+            padding: 0;
+            border: none;
+            font-size: 1em;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f0ebff 0%, #e6dcff 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 6px solid #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
+        }
+
+        .highlight-box strong {
+            color: #667eea;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 6px solid #ffc107;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.15);
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 6px solid #17a2b8;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.15);
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 6px solid #28a745;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.15);
+        }
+
+        ul, ol {
+            margin-left: 35px;
+            margin-bottom: 25px;
+        }
+
+        li {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.9;
+        }
+
+        li strong {
+            color: #2c3e50;
+        }
+
+        .step-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-right: 15px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .step-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+            border: 2px solid #e9ecef;
+            padding: 25px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            margin: 0 0 15px 0;
+            font-size: 1.2em;
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .changelog-item {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .changelog-item h4 {
+            color: #667eea;
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+        }
+
+        .changelog-date {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:hover {
+            background: #f8f9ff;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .tag-new {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .tag-update {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .tag-fix {
+            background: #ffe5e5;
+            color: #721c24;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5568d3;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .content {
+                margin: 10px;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-plane"></i> Travel In</h1>
+        <p>Complete Travel Booking Management System</p>
+        <div class="version-badge">Version 4.1</div>
+        <div class="date-badge"><i class="far fa-calendar"></i> Updated: October 27, 2025</div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <h3><i class="fas fa-list"></i> Navigation</h3>
+            
+            <div class="nav-item active" onclick="showSection('overview')">
+                <span class="nav-icon"><i class="fas fa-home"></i></span>
+                <span>Overview</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('requirements')">
+                <span class="nav-icon"><i class="fas fa-server"></i></span>
+                <span>Server Requirements</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('installation')">
+                <span class="nav-icon"><i class="fas fa-download"></i></span>
+                <span>Installation</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('getting-started')">
+                <span class="nav-icon"><i class="fas fa-rocket"></i></span>
+                <span>Getting Started</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('admin-panel')">
+                <span class="nav-icon"><i class="fas fa-user-shield"></i></span>
+                <span>Admin Panel</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('booking-system')">
+                <span class="nav-icon"><i class="fas fa-ticket-alt"></i></span>
+                <span>Booking System</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('payment')">
+                <span class="nav-icon"><i class="fas fa-credit-card"></i></span>
+                <span>Payment Integration</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('migrations')">
+                <span class="nav-icon"><i class="fas fa-database"></i></span>
+                <span>Database Migrations</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('troubleshooting')">
+                <span class="nav-icon"><i class="fas fa-tools"></i></span>
+                <span>Troubleshooting</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('new-updates')">
+                <span class="nav-icon"><i class="fas fa-star"></i></span>
+                <span>New Updates</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('changelog')">
+                <span class="nav-icon"><i class="fas fa-history"></i></span>
+                <span>Changelog</span>
+            </div>
+            
+            <div class="nav-item" onclick="showSection('support')">
+                <span class="nav-icon"><i class="fas fa-life-ring"></i></span>
+                <span>Support</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Overview Section -->
+            <div id="overview" class="section active">
+                <h2><i class="fas fa-home"></i> Overview</h2>
+                
+                <div class="highlight-box">
+                    <h3><i class="fas fa-heart"></i> Thank You for Purchasing Travel In!</h3>
+                    <p>Welcome to Travel In - a comprehensive travel booking management system built with Laravel 10. This documentation will guide you through installation, configuration, and all the amazing features this system offers.</p>
+                </div>
+
+                <div class="alert">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Important:</strong> This is a Laravel 10.10 application requiring PHP 8.1+. Some experience with Laravel framework and server configuration is required.
+                </div>
+
+                <h3><i class="fas fa-star"></i> What's New in Version 4.1</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-passport"></i></div>
+                        <h4>Passport Information</h4>
+                        <p>Complete passport details collection for all passengers (adults, children, infants) with 5 required fields.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-birthday-cake"></i></div>
+                        <h4>Age-Based Validation</h4>
+                        <p>Smart date of birth validation - 18+ for adults, under 18 for children with dynamic date picker limits.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-file-pdf"></i></div>
+                        <h4>Enhanced PDFs</h4>
+                        <p>All booking PDFs now include passport information with country name resolution and formatted display.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h4>API Updates</h4>
+                        <p>Complete API documentation for mobile apps with React Native and Flutter integration examples.</p>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-cog"></i> Core Features</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Main Modules</h4>
+                        <ul>
+                            <li><strong>Users Management</strong> - Complete user CRUD operations</li>
+                            <li><strong>Hotels Management</strong> - Hotel listings, bookings, reviews</li>
+                            <li><strong>Tours Management</strong> - Tour packages, pricing, availability</li>
+                            <li><strong>Flights Management</strong> - Flight search, booking, Duffel API integration</li>
+                            <li><strong>Blogs Management</strong> - Content management system</li>
+                            <li><strong>Services Management</strong> - Additional services management</li>
+                            <li><strong>CMS Pages</strong> - Custom page creation</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Location Management</h4>
+                        <ul>
+                            <li><strong>Countries</strong> - Complete country database with flags</li>
+                            <li><strong>States/Provinces</strong> - State management with country association</li>
+                            <li><strong>Cities</strong> - City management with state/country linking</li>
+                            <li><strong>Airports</strong> - Airport database with IATA/ICAO codes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-language"></i> Multilingual Support</h3>
+                <ul>
+                    <li><strong>Dynamic Language Management</strong> - Add/edit/delete languages through admin panel</li>
+                    <li><strong>RTL Support</strong> - Automatic Right-to-Left layout for Arabic, Hebrew, etc.</li>
+                    <li><strong>Content Translation</strong> - Translate all dynamic content (tours, hotels, blogs)</li>
+                    <li><strong>Menu Translation</strong> - Translate navigation menus</li>
+                    <li><strong>Flag Images</strong> - Upload custom flag images for each language</li>
+                </ul>
+
+                <h3><i class="fas fa-calendar-check"></i> Booking System</h3>
+                <ul>
+                    <li><strong>Tour Bookings</strong> - Complete tour booking management with email notifications</li>
+                    <li><strong>Hotel Bookings</strong> - Hotel reservation system with room selection</li>
+                    <li><strong>Flight Bookings</strong> - Duffel API integration for real-time flight data</li>
+                    <li><strong>Payment Gateway</strong> - PayPal, Stripe, and Paystack integration</li>
+                </ul>
+            </div>
+
+            <!-- Server Requirements Section -->
+            <div id="requirements" class="section">
+                <h2><i class="fas fa-server"></i> Server Requirements</h2>
+                
+                <p>Travel In requires a web server with the following specifications:</p>
+
+                <h3>Minimum Requirements</h3>
+                
+                <div class="step-card">
+                    <h4>PHP Requirements</h4>
+                    <ul>
+                        <li><strong>PHP Version:</strong> 8.1 or higher (8.2+ recommended)</li>
+                        <li><strong>Extensions Required:</strong>
+                            <ul>
+                                <li>BCMath PHP Extension</li>
+                                <li>Ctype PHP Extension</li>
+                                <li>Fileinfo PHP Extension</li>
+                                <li>JSON PHP Extension</li>
+                                <li>Mbstring PHP Extension</li>
+                                <li>OpenSSL PHP Extension</li>
+                                <li>PDO PHP Extension</li>
+                                <li>Tokenizer PHP Extension</li>
+                                <li>XML PHP Extension</li>
+                                <li>GD Library / Imagick (for image processing)</li>
+                                <li>cURL Extension</li>
+                                <li>Zip Extension</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h4>Database Requirements</h4>
+                    <ul>
+                        <li><strong>MySQL:</strong> Version 5.7 or higher</li>
+                        <li><strong>MariaDB:</strong> Version 10.2 or higher</li>
+                        <li><strong>Collation:</strong> utf8mb4_unicode_ci (recommended)</li>
+                        <li><strong>Permissions:</strong> CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h4>Web Server</h4>
+                    <ul>
+                        <li><strong>Apache 2.4+</strong> with mod_rewrite enabled</li>
+                        <li><strong>Nginx 1.10+</strong> (alternative to Apache)</li>
+                        <li><strong>Document Root:</strong> Must point to <code>/public</code> directory</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h4>Server Configuration</h4>
+                    <ul>
+                        <li><strong>Memory Limit:</strong> 256M or higher (512M recommended)</li>
+                        <li><strong>Max Execution Time:</strong> 300 seconds or higher</li>
+                        <li><strong>Max Upload Size:</strong> 20M or higher (for image uploads)</li>
+                        <li><strong>Max Post Size:</strong> 25M or higher</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <strong>Recommended Hosting:</strong> VPS or Dedicated hosting for production use. Shared hosting may work but could have performance limitations.
+                </div>
+
+                <div class="warning-box">
+                    <strong>Laravel 10 Requirements:</strong> This is a Laravel 10.10 application. Ensure your server meets all Laravel 10 requirements before installation.
+                </div>
+            </div>
+
+            <!-- Installation Section -->
+            <div id="installation" class="section">
+                <h2><i class="fas fa-download"></i> Installation</h2>
+
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">1</div>
+                        <h3>Server Requirements</h3>
+                    </div>
+                    <ul>
+                        <li><strong>PHP Version:</strong> 8.1 or higher</li>
+                        <li><strong>Laravel:</strong> 10.10 or higher</li>
+                        <li><strong>Database:</strong> MySQL 5.7+ or MariaDB 10.2+</li>
+                        <li><strong>Web Server:</strong> Apache or Nginx</li>
+                        <li><strong>Extensions:</strong> OpenSSL, PDO, Mbstring, Tokenizer, XML, Ctype, JSON, BCMath</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">2</div>
+                        <h3>Upload Files</h3>
+                    </div>
+                    <p><strong>For Local Development (XAMPP/WAMP):</strong></p>
+                    <ol>
+                        <li>Navigate to your XAMPP <code>htdocs</code> folder (or WAMP <code>www</code> folder)</li>
+                        <li>Create a new folder (e.g., <code>travelnew</code>)</li>
+                        <li>Extract all files from the package ZIP into this folder</li>
+                        <li>Your path should be: <code>C:\xampp\htdocs\travelnew\</code></li>
+                    </ol>
+                    <p><strong>For Production Server:</strong></p>
+                    <ol>
+                        <li>Upload all files to your domain's public_html directory</li>
+                        <li>Ensure proper file permissions are set</li>
+                    </ol>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">3</div>
+                        <h3>Database Setup</h3>
+                    </div>
+                    <p>You have two options for database setup:</p>
+                    
+                    <h4>Option A: Using SQL File (Quick Setup)</h4>
+                    <ol>
+                        <li>Create a new database in phpMyAdmin</li>
+                        <li>Import the <code>travelin25.sql</code> file located in the root directory</li>
+                        <li>Wait for the import to complete</li>
+                    </ol>
+
+                    <h4>Option B: Using Laravel Migrations (Recommended)</h4>
+                    <ol>
+                        <li>Create a new database in phpMyAdmin</li>
+                        <li>Configure your <code>.env</code> file with database credentials</li>
+                        <li>Run the following command:
+                            <pre><code>php artisan migrate</code></pre>
+                        </li>
+                    </ol>
+
+                    <p>Migrations provide better version control and are recommended for production deployments.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">4</div>
+                        <h3>Configure Environment</h3>
+                    </div>
+                    <p>Open the <code>.env</code> file in the root directory and update the following:</p>
+                    <pre><code class="language-env">APP_NAME=TravelIn
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost/travelnew
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_username
+DB_PASSWORD=your_password</code></pre>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">5</div>
+                        <h3>Clear Cache & Link Storage</h3>
+                    </div>
+                    <p>Run the following commands in your terminal:</p>
+                    <pre><code>php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear</code></pre>
+                    
+                    <p class="highlight-box"><strong>Create Storage Link:</strong> Visit <code>http://yourdomain.com/storage-link</code> to create the symbolic link for profile photos and other uploads.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">6</div>
+                        <h3>Default Admin Credentials</h3>
+                    </div>
+                    <p>Login to the admin panel using:</p>
+                    <pre><code>URL: http://yourdomain.com/login
+
+Email: admin@demo.com
+Password: demo2626</code></pre>
+                    
+                    <div class="warning-box">
+                        <strong>Security Notice:</strong> Please change the admin credentials immediately after first login!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Getting Started Section -->
+            <div id="getting-started" class="section">
+                <h2><i class="fas fa-rocket"></i> Getting Started</h2>
+
+                <h3><i class="fas fa-cog"></i> Initial Configuration</h3>
+                <div class="step-card">
+                    <h4>1. Site Settings</h4>
+                    <p>Navigate to <strong>Admin Panel → Settings → Site Settings</strong> and configure:</p>
+                    <ul>
+                        <li>Site Logo & Favicon</li>
+                        <li>Company Name & Contact Information</li>
+                        <li>SMTP Email Configuration</li>
+                        <li>Duffel API Credentials (for flight search)</li>
+                        <li>Payment Gateway Settings (PayPal, Stripe, Paystack)</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h4>2. Add Languages</h4>
+                    <p>Navigate to <strong>Admin Panel → Languages → Add New</strong>:</p>
+                    <ol>
+                        <li>Enter Language Name (e.g., "Arabic")</li>
+                        <li>Enter Language Code (e.g., "ar")</li>
+                        <li>Upload Flag Image</li>
+                        <li>Check "RTL" if applicable</li>
+                        <li>Save</li>
+                    </ol>
+                </div>
+
+                <div class="step-card">
+                    <h4>3. Add Location Data</h4>
+                    <p>Start adding your location data:</p>
+                    <ol>
+                        <li><strong>Countries:</strong> Admin → Locations → Countries</li>
+                        <li><strong>States:</strong> Admin → Locations → States</li>
+                        <li><strong>Cities:</strong> Admin → Locations → Cities</li>
+                        <li><strong>Airports:</strong> Admin → Locations → Airports</li>
+                    </ol>
+                </div>
+
+                <h3><i class="fas fa-list"></i> Content Management</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Add Hotels</h4>
+                        <p>Create hotel listings with multiple images, pricing, amenities, and location details.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Add Tours</h4>
+                        <p>Create tour packages with itinerary, pricing, duration, and booking information.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Add Blogs</h4>
+                        <p>Create blog posts with categories, tags, and SEO optimization.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Manage Menu</h4>
+                        <p>Customize navigation menus with multi-level dropdown support.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Panel Section -->
+            <div id="admin-panel" class="section">
+                <h2><i class="fas fa-user-shield"></i> Admin Panel Features</h2>
+                
+                <p>The admin panel provides complete control over the entire Travel In system. Access it at: <code>http://yourdomain.com/login</code></p>
+
+                <div class="info-box">
+                    <strong><i class="fas fa-key"></i> Default Credentials:</strong><br>
+                    Email: <code>admin@demo.com</code><br>
+                    Password: <code>demo2626</code><br>
+                    <span style="color: #dc3545;">⚠️ Change these immediately after first login!</span>
+                </div>
+
+                <h3><i class="fas fa-tachometer-alt"></i> Dashboard Overview</h3>
+                <div class="step-card">
+                    <p>The admin dashboard displays key statistics and quick access to important features:</p>
+                    <ul>
+                        <li><strong>Statistics Cards:</strong> Total bookings, revenue, active users</li>
+                        <li><strong>Recent Bookings:</strong> Latest tour, hotel, and flight bookings</li>
+                        <li><strong>Revenue Charts:</strong> Monthly revenue visualization</li>
+                        <li><strong>Quick Actions:</strong> Access to frequently used features</li>
+                        <li><strong>System Notifications:</strong> Important alerts and updates</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-users"></i> User Management</h3>
+                <div class="step-card">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><strong>View All Users:</strong> Complete list with search and filters</li>
+                        <li><strong>Add New User:</strong> Create user accounts manually</li>
+                        <li><strong>Edit User:</strong> Update profile information, email, password</li>
+                        <li><strong>Delete User:</strong> Remove user accounts</li>
+                        <li><strong>User Status:</strong> Activate/deactivate accounts</li>
+                        <li><strong>View Bookings:</strong> See all bookings by specific user</li>
+                        <li><strong>Team Management:</strong> Manage team members and permissions</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-suitcase-rolling"></i> Tours Management</h3>
+                <div class="step-card">
+                    <h4>Tour Operations</h4>
+                    <ul>
+                        <li><strong>Create Tours:</strong> Add new tour packages with complete details</li>
+                        <li><strong>Edit Tours:</strong> Update tour information, pricing, availability</li>
+                        <li><strong>Delete Tours:</strong> Remove old or discontinued tours</li>
+                        <li><strong>Tour Gallery:</strong> Upload multiple images per tour</li>
+                        <li><strong>Pricing Management:</strong> Set prices, discounts, seasonal rates</li>
+                        <li><strong>Itinerary Builder:</strong> Day-by-day tour schedule</li>
+                        <li><strong>Inclusions/Exclusions:</strong> What's included in the package</li>
+                    </ul>
+                    
+                    <h4>Tour Bookings</h4>
+                    <ul>
+                        <li><strong>View All Bookings:</strong> Filter by status, date, customer</li>
+                        <li><strong>Booking Details:</strong> Complete customer and payment info</li>
+                        <li><strong>Status Management:</strong> Pending, Confirmed, Completed, Cancelled</li>
+                        <li><strong>Email Notifications:</strong> Send confirmations and updates</li>
+                        <li><strong>Payment Tracking:</strong> View payment status and amounts</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-hotel"></i> Hotels Management</h3>
+                <div class="step-card">
+                    <h4>Hotel Operations</h4>
+                    <ul>
+                        <li><strong>Add Hotels:</strong> Create hotel listings with complete details</li>
+                        <li><strong>Edit Hotels:</strong> Update hotel information and amenities</li>
+                        <li><strong>Delete Hotels:</strong> Remove hotel listings</li>
+                        <li><strong>Hotel Gallery:</strong> Upload hotel photos and images</li>
+                        <li><strong>Room Management:</strong> Different room types with pricing</li>
+                        <li><strong>Amenities:</strong> WiFi, pool, gym, parking, etc.</li>
+                        <li><strong>Location Details:</strong> Map integration and address</li>
+                    </ul>
+                    
+                    <h4>Hotel Bookings</h4>
+                    <ul>
+                        <li><strong>View Bookings:</strong> All hotel reservations</li>
+                        <li><strong>Check-in/Check-out:</strong> Manage arrival and departure dates</li>
+                        <li><strong>Guest Details:</strong> Complete guest information</li>
+                        <li><strong>Special Requests:</strong> Customer requirements and notes</li>
+                        <li><strong>Status Updates:</strong> Booking confirmation and management</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-plane"></i> Flights Management</h3>
+                <div class="step-card">
+                    <h4>Flight System</h4>
+                    <ul>
+                        <li><strong>Duffel API Integration:</strong> Real-time flight data</li>
+                        <li><strong>Flight Search:</strong> One-way, round-trip, multi-city</li>
+                        <li><strong>Airlines Management:</strong> Manage airline information</li>
+                        <li><strong>Airports Database:</strong> IATA/ICAO codes management</li>
+                        <li><strong>Pricing Controls:</strong> Service fees and markups</li>
+                    </ul>
+                    
+                    <h4>Flight Bookings (Version 4.1)</h4>
+                    <ul>
+                        <li><strong>View All Bookings:</strong> Complete flight reservation list</li>
+                        <li><strong>Passenger Details:</strong> All passenger information</li>
+                        <li><strong>Passport Information:</strong> Complete passport data for all passengers</li>
+                        <li><strong>Age Validation:</strong> Automatic age verification</li>
+                        <li><strong>PDF Downloads:</strong> Booking tickets with all details</li>
+                        <li><strong>Payment Status:</strong> Track payment completion</li>
+                        <li><strong>Booking Reference:</strong> Unique booking IDs</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-globe"></i> Location Management</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Countries</h4>
+                        <ul style="margin-left: 20px; font-size: 0.95em;">
+                            <li>Add/Edit/Delete countries</li>
+                            <li>Country flags upload</li>
+                            <li>ISO codes management</li>
+                            <li>Status management</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>States/Provinces</h4>
+                        <ul style="margin-left: 20px; font-size: 0.95em;">
+                            <li>State management</li>
+                            <li>Country association</li>
+                            <li>State codes</li>
+                            <li>Sort order</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Cities</h4>
+                        <ul style="margin-left: 20px; font-size: 0.95em;">
+                            <li>City database</li>
+                            <li>State/Country linking</li>
+                            <li>Featured cities</li>
+                            <li>Status control</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Airports</h4>
+                        <ul style="margin-left: 20px; font-size: 0.95em;">
+                            <li>Airport database</li>
+                            <li>IATA/ICAO codes</li>
+                            <li>City association</li>
+                            <li>Type (Intl/Domestic)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-language"></i> Multilingual System</h3>
+                <div class="step-card">
+                    <h4>Language Management</h4>
+                    <ul>
+                        <li><strong>Add Languages:</strong> Create new language entries</li>
+                        <li><strong>Edit Languages:</strong> Update language details</li>
+                        <li><strong>Delete Languages:</strong> Remove unused languages</li>
+                        <li><strong>Flag Upload:</strong> Custom flag images for each language</li>
+                        <li><strong>RTL Support:</strong> Enable Right-to-Left for Arabic, Hebrew, etc.</li>
+                        <li><strong>Default Language:</strong> Set primary site language</li>
+                        <li><strong>Status Control:</strong> Enable/disable languages</li>
+                    </ul>
+                    
+                    <h4>Translation Management</h4>
+                    <ul>
+                        <li><strong>Menu Translations:</strong> Translate navigation menus</li>
+                        <li><strong>Content Translations:</strong> Translate tours, hotels, blogs</li>
+                        <li><strong>Widget Translations:</strong> Homepage widgets and sections</li>
+                        <li><strong>Static Text:</strong> Frontend labels and buttons</li>
+                        <li><strong>Bulk Translation:</strong> Translate multiple items at once</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-newspaper"></i> Content Management</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Blogs</h4>
+                        <ul style="margin-left: 20px; font-size: 0.95em;">
+                            <li>Create/Edit blog posts</li>
+                            <li>Categories & tags</li>
+                            <li>Featured images</li>
+                            <li>SEO optimization</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>CMS Pages</h4>
+                        <ul style="margin-left: 20px; font-size: 0.95em;">
+                            <li>About Us</li>
+                            <li>Terms & Conditions</li>
+                            <li>Privacy Policy</li>
+                            <li>Custom pages</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Our Experts</h4>
+                        <ul style="margin-left: 20px; font-size: 0.95em;">
+                            <li>Team members</li>
+                            <li>Expert profiles</li>
+                            <li>Social media links</li>
+                            <li>Photo upload</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Testimonials</h4>
+                        <ul style="margin-left: 20px; font-size: 0.95em;">
+                            <li>Customer reviews</li>
+                            <li>Rating system</li>
+                            <li>Featured testimonials</li>
+                            <li>Approval system</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-bars"></i> Menu Management</h3>
+                <div class="step-card">
+                    <h4>Navigation Menus</h4>
+                    <ul>
+                        <li><strong>Create Menus:</strong> Multiple menu locations</li>
+                        <li><strong>Menu Items:</strong> Add/edit/delete menu items</li>
+                        <li><strong>Nested Menus:</strong> Multi-level dropdown support</li>
+                        <li><strong>Menu Types:</strong> Header, Footer, Sidebar menus</li>
+                        <li><strong>External Links:</strong> Link to external websites</li>
+                        <li><strong>Menu Translations:</strong> Translate menu items</li>
+                        <li><strong>Sort Order:</strong> Drag-and-drop menu ordering</li>
+                        <li><strong>Custom URLs:</strong> Add any URL to menu</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-cog"></i> Site Settings</h3>
+                <div class="step-card">
+                    <h4>General Settings</h4>
+                    <ul>
+                        <li><strong>Site Logo:</strong> Upload main and footer logos</li>
+                        <li><strong>Favicon:</strong> Site icon</li>
+                        <li><strong>Company Info:</strong> Name, address, contact details</li>
+                        <li><strong>Social Media:</strong> Facebook, Twitter, Instagram, etc.</li>
+                        <li><strong>Copyright Text:</strong> Footer copyright message</li>
+                        <li><strong>Currency:</strong> Default currency for bookings</li>
+                    </ul>
+                    
+                    <h4>Email Configuration</h4>
+                    <ul>
+                        <li><strong>SMTP Settings:</strong> Host, port, username, password</li>
+                        <li><strong>From Email:</strong> Sender email address</li>
+                        <li><strong>From Name:</strong> Sender name</li>
+                        <li><strong>Test Email:</strong> Send test emails</li>
+                        <li><strong>Email Templates:</strong> Booking confirmations, notifications</li>
+                    </ul>
+                    
+                    <h4>Payment Gateway Settings</h4>
+                    <ul>
+                        <li><strong>PayPal:</strong> Client ID, Secret, Mode (Sandbox/Live)</li>
+                        <li><strong>Stripe:</strong> Publishable Key, Secret Key</li>
+                        <li><strong>Paystack:</strong> Public Key, Secret Key</li>
+                        <li><strong>Service Fees:</strong> Add percentage or fixed fees</li>
+                        <li><strong>Currency Settings:</strong> Payment currency configuration</li>
+                    </ul>
+                    
+                    <h4>Duffel API Settings</h4>
+                    <ul>
+                        <li><strong>API Token:</strong> Duffel access token</li>
+                        <li><strong>API Mode:</strong> Test or Live environment</li>
+                        <li><strong>Service Fees:</strong> Flight booking fees</li>
+                        <li><strong>Currency:</strong> Default flight currency</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-envelope"></i> Contact Messages</h3>
+                <div class="step-card">
+                    <h4>Message Management</h4>
+                    <ul>
+                        <li><strong>View Messages:</strong> All contact form submissions</li>
+                        <li><strong>Message Details:</strong> Name, email, subject, message</li>
+                        <li><strong>Reply:</strong> Respond directly from admin panel</li>
+                        <li><strong>Delete Messages:</strong> Remove old messages</li>
+                        <li><strong>Mark as Read:</strong> Organize messages</li>
+                        <li><strong>Export:</strong> Download messages as CSV</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-star"></i> Reviews Management</h3>
+                <div class="step-card">
+                    <h4>Review System</h4>
+                    <ul>
+                        <li><strong>View All Reviews:</strong> Tours, hotels, flights reviews</li>
+                        <li><strong>Approve/Reject:</strong> Moderate customer reviews</li>
+                        <li><strong>Edit Reviews:</strong> Update review content if needed</li>
+                        <li><strong>Delete Reviews:</strong> Remove inappropriate reviews</li>
+                        <li><strong>Rating System:</strong> 1-5 star ratings</li>
+                        <li><strong>Featured Reviews:</strong> Highlight best reviews</li>
+                        <li><strong>Email Notifications:</strong> Alert admins of new reviews</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-chart-line"></i> Reports & Analytics</h3>
+                <div class="step-card">
+                    <h4>Available Reports</h4>
+                    <ul>
+                        <li><strong>Booking Reports:</strong> Daily, weekly, monthly booking stats</li>
+                        <li><strong>Revenue Reports:</strong> Total revenue by period</li>
+                        <li><strong>Payment Reports:</strong> Payment gateway wise reports</li>
+                        <li><strong>User Reports:</strong> Registration and activity stats</li>
+                        <li><strong>Popular Destinations:</strong> Most booked locations</li>
+                        <li><strong>Export Data:</strong> Download reports as PDF/Excel</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-shield-alt"></i> Security & Permissions</h3>
+                <div class="step-card">
+                    <h4>Security Features</h4>
+                    <ul>
+                        <li><strong>Admin Roles:</strong> Different permission levels</li>
+                        <li><strong>Team Management:</strong> Multiple admin accounts</li>
+                        <li><strong>Activity Log:</strong> Track admin actions</li>
+                        <li><strong>Password Protection:</strong> Secure password hashing</li>
+                        <li><strong>Two-Factor Auth:</strong> Enhanced security (optional)</li>
+                        <li><strong>Session Management:</strong> Control active sessions</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-mobile-alt"></i> Homepage Settings</h3>
+                <div class="step-card">
+                    <h4>Customize Homepage</h4>
+                    <ul>
+                        <li><strong>Hero Section:</strong> Banner image and text</li>
+                        <li><strong>Search Widget:</strong> Homepage search form</li>
+                        <li><strong>Featured Tours:</strong> Highlight top tours</li>
+                        <li><strong>Featured Hotels:</strong> Showcase hotels</li>
+                        <li><strong>Popular Destinations:</strong> Display top cities</li>
+                        <li><strong>Testimonials Section:</strong> Customer reviews</li>
+                        <li><strong>Blog Posts:</strong> Latest blog entries</li>
+                        <li><strong>Call-to-Action:</strong> Custom CTA sections</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <strong><i class="fas fa-check-circle"></i> Admin Dashboard Access:</strong> Navigate to <code>http://yourdomain.com/login</code> and use your admin credentials to access all these powerful features.
+                </div>
+
+                <div class="warning-box">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Security Best Practices:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>✓ Change default admin credentials immediately</li>
+                        <li>✓ Use strong passwords with special characters</li>
+                        <li>✓ Limit admin user accounts to trusted personnel only</li>
+                        <li>✓ Regularly backup your database and files</li>
+                        <li>✓ Keep Laravel and dependencies updated</li>
+                        <li>✓ Use SSL certificate (HTTPS) in production</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Booking System Section -->
+            <div id="booking-system" class="section">
+                <h2><i class="fas fa-ticket-alt"></i> Booking System</h2>
+                
+                <p>Travel In includes comprehensive booking management for tours, hotels, and flights with complete payment integration.</p>
+
+                <h3><i class="fas fa-suitcase-rolling"></i> Tour Bookings</h3>
+                <div class="step-card">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><strong>Online Booking:</strong> Users can book tours directly from the frontend</li>
+                        <li><strong>Pricing Management:</strong> Dynamic pricing with per-person or per-group options</li>
+                        <li><strong>Date Selection:</strong> Availability calendar for tour dates</li>
+                        <li><strong>Email Notifications:</strong> Automatic confirmation emails to customers and admin</li>
+                        <li><strong>Booking Management:</strong> Admin panel to view and manage all bookings</li>
+                        <li><strong>Status Tracking:</strong> Pending, Confirmed, Completed, Cancelled statuses</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-hotel"></i> Hotel Bookings</h3>
+                <div class="step-card">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><strong>Room Selection:</strong> Multiple room types with different pricing</li>
+                        <li><strong>Check-in/Check-out:</strong> Date range selection with automatic rate calculation</li>
+                        <li><strong>Guest Details:</strong> Collect guest information during booking</li>
+                        <li><strong>Special Requests:</strong> Allow customers to add special requirements</li>
+                        <li><strong>Payment Integration:</strong> Multiple payment gateway support</li>
+                        <li><strong>Booking Confirmation:</strong> Instant confirmation with booking reference</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-plane"></i> Flight Bookings</h3>
+                <div class="step-card">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><strong>Duffel API Integration:</strong> Real-time flight search and booking</li>
+                        <li><strong>Multi-Passenger Support:</strong> Adults, children, and infants</li>
+                        <li><strong>Passport Information:</strong> Complete passport details collection (Version 4.1)</li>
+                        <li><strong>Age Validation:</strong> Smart age-based DOB validation (Version 4.1)</li>
+                        <li><strong>Optional Add-ons:</strong> Extra services like meals, baggage, seats</li>
+                        <li><strong>Price Breakdown:</strong> Transparent pricing with taxes and fees</li>
+                        <li><strong>PDF Tickets:</strong> Downloadable booking confirmation PDFs</li>
+                        <li><strong>Admin Management:</strong> Full booking management in admin panel</li>
+                    </ul>
+                </div>
+
+                <h3><i class="fas fa-cog"></i> Admin Booking Management</h3>
+                <p>Navigate to <strong>Admin Panel → Bookings</strong> to:</p>
+                <ul>
+                    <li>View all tour, hotel, and flight bookings</li>
+                    <li>Filter bookings by status, date, or customer</li>
+                    <li>Update booking status</li>
+                    <li>View complete passenger and passport details</li>
+                    <li>Download booking PDFs</li>
+                    <li>Send confirmation emails</li>
+                    <li>Manage cancellations and refunds</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong><i class="fas fa-info-circle"></i> Pro Tip:</strong> All booking data is stored with complete audit trails, allowing you to track changes and maintain customer history.
+                </div>
+            </div>
+
+            <!-- Payment Integration Section -->
+            <div id="payment" class="section">
+                <h2><i class="fas fa-credit-card"></i> Payment Gateway Integration</h2>
+                
+                <p>Travel In supports multiple payment gateways for processing tour, hotel, and flight bookings. Below are detailed setup guides for each gateway:</p>
+
+                <h3>Supported Payment Gateways</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fab fa-paypal"></i></div>
+                        <h4>PayPal</h4>
+                        <p>Global payment processor with worldwide coverage</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fab fa-stripe"></i></div>
+                        <h4>Stripe</h4>
+                        <p>Modern payment platform for credit/debit cards</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-globe-africa"></i></div>
+                        <h4>Paystack</h4>
+                        <p>African payment gateway integration</p>
+                    </div>
+                </div>
+
+                <h3>1. PayPal Setup Guide</h3>
+                
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">1</div>
+                        <h3>Create PayPal Developer Account</h3>
+                    </div>
+                    <ol>
+                        <li>Visit <a href="https://developer.paypal.com" target="_blank">https://developer.paypal.com</a></li>
+                        <li>Click "Log In" or "Sign Up" if you don't have an account</li>
+                        <li>Use your existing PayPal account or create a new one</li>
+                        <li>Accept the developer agreement</li>
+                    </ol>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">2</div>
+                        <h3>Create a PayPal App</h3>
+                    </div>
+                    <ol>
+                        <li>Go to Dashboard > My Apps & Credentials</li>
+                        <li>Select "Sandbox" for testing or "Live" for production</li>
+                        <li>Click "Create App" button</li>
+                        <li>Enter your App Name (e.g., "TravelIn")</li>
+                        <li>Select app type: "Merchant"</li>
+                        <li>Click "Create App"</li>
+                    </ol>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">3</div>
+                        <h3>Get API Credentials</h3>
+                    </div>
+                    <p>After creating the app, you'll see:</p>
+                    <ul>
+                        <li><strong>Client ID:</strong> Copy this value</li>
+                        <li><strong>Secret:</strong> Click "Show" and copy this value</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Note:</strong> Keep these credentials secure. Never share them publicly or commit them to version control.
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">4</div>
+                        <h3>Configure in Travel In Admin</h3>
+                    </div>
+                    <ol>
+                        <li>Login to Admin Panel</li>
+                        <li>Navigate to <strong>Settings → PayPal Settings</strong></li>
+                        <li>Enable PayPal: <code>Yes</code></li>
+                        <li>PayPal Mode: <code>sandbox</code> (for testing) or <code>live</code> (for production)</li>
+                        <li>Paste your <strong>Client ID</strong></li>
+                        <li>Paste your <strong>Secret</strong></li>
+                        <li>Click "Save Settings"</li>
+                    </ol>
+                </div>
+
+                <h3>2. Stripe Setup Guide</h3>
+                
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">1</div>
+                        <h3>Create Stripe Account</h3>
+                    </div>
+                    <ol>
+                        <li>Visit <a href="https://stripe.com" target="_blank">https://stripe.com</a></li>
+                        <li>Click "Sign Up" or "Start Now"</li>
+                        <li>Enter your email and create a password</li>
+                        <li>Complete business information</li>
+                        <li>Verify your email address</li>
+                    </ol>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">2</div>
+                        <h3>Get API Keys</h3>
+                    </div>
+                    <ol>
+                        <li>Login to <a href="https://dashboard.stripe.com" target="_blank">Stripe Dashboard</a></li>
+                        <li>Click "Developers" in the left sidebar</li>
+                        <li>Click "API keys"</li>
+                        <li>You'll see two sets of keys:
+                            <ul>
+                                <li><strong>Test keys</strong> (for development)</li>
+                                <li><strong>Live keys</strong> (for production - visible after activation)</li>
+                            </ul>
+                        </li>
+                        <li>For each set, copy:
+                            <ul>
+                                <li><strong>Publishable key:</strong> Starts with <code>pk_test_</code> or <code>pk_live_</code></li>
+                                <li><strong>Secret key:</strong> Starts with <code>sk_test_</code> or <code>sk_live_</code> (click "Reveal" first)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">
+                        <div class="step-number">3</div>
+                        <h3>Configure in Travel In Admin</h3>
+                    </div>
+                    <ol>
+                        <li>Login to Admin Panel</li>
+                        <li>Navigate to <strong>Settings → Stripe Settings</strong></li>
+                        <li>Enable Stripe: <code>Yes</code></li>
+                        <li>Paste your <strong>Publishable Key</strong></li>
+                        <li>Paste your <strong>Secret Key</strong></li>
+                        <li>Click "Save Settings"</li>
+                    </ol>
+                    <div class="warning-box">
+                        <strong>Important:</strong> Use test keys during development. Only switch to live keys when you're ready to accept real payments and have completed Stripe account activation.
+                    </div>
+                </div>
+
+                <h3>Testing Payment Gateways</h3>
+                
+                <div class="step-card">
+                    <h4>General Testing Steps</h4>
+                    <ol>
+                        <li>Use sandbox/test mode credentials for all gateways</li>
+                        <li>Test card numbers (each gateway provides their own):
+                            <ul>
+                                <li><strong>Stripe:</strong> <code>4242 4242 4242 4242</code></li>
+                                <li><strong>PayPal:</strong> Use PayPal sandbox accounts</li>
+                                <li><strong>Paystack:</strong> <code>4084 0840 8408 4081</code></li>
+                            </ul>
+                        </li>
+                        <li>Make a test booking (tour, hotel, or flight)</li>
+                        <li>Verify transaction appears in:
+                            <ul>
+                                <li>Gateway dashboard</li>
+                                <li>Travel In admin panel</li>
+                                <li>Customer email confirmation</li>
+                            </ul>
+                        </li>
+                        <li>Test both successful and failed transactions</li>
+                        <li>Once satisfied, switch to live mode credentials</li>
+                    </ol>
+                </div>
+
+                <div class="warning-box">
+                    <strong>Go Live Checklist:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>✓ Complete business verification on the gateway</li>
+                        <li>✓ Replace test keys with live/production keys</li>
+                        <li>✓ Change mode from sandbox/test to live/production</li>
+                        <li>✓ Test with a small real transaction</li>
+                        <li>✓ Ensure SSL certificate is installed on your domain</li>
+                        <li>✓ Review gateway's terms of service and fees</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <strong>Payment Security:</strong> All payment processing is handled securely through the gateway's PCI-compliant servers. Travel In never stores sensitive card information.
+                </div>
+            </div>
+
+            <!-- Database Migrations Section -->
+            <div id="migrations" class="section">
+                <h2><i class="fas fa-database"></i> Database Migrations</h2>
+                
+                <p>Travel In includes complete Laravel migration files for all database tables, providing version-controlled database management.</p>
+
+                <h3>What are Migrations?</h3>
+                <p>Migrations are Laravel's way of version controlling your database schema. They allow you to:</p>
+                <ul>
+                    <li>✅ Track database schema changes in version control</li>
+                    <li>✅ Set up fresh databases easily</li>
+                    <li>✅ Share schema with team members</li>
+                    <li>✅ Roll back changes if needed</li>
+                    <li>✅ Test with fresh database instances</li>
+                </ul>
+
+                <h3>Available Migration Files</h3>
+                <p>All migration files are located in <code>database/migrations/</code> including:</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Core System</h4>
+                        <p>Languages, translations, modules, menus, settings</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Location Data</h4>
+                        <p>Countries, states, cities, airports</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Booking System</h4>
+                        <p>Tour bookings, hotel bookings, flight bookings</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Content</h4>
+                        <p>Content translations, widget translations</p>
+                    </div>
+                </div>
+
+                <h3>Using Migrations</h3>
+
+                <h4>Fresh Installation (New Environment)</h4>
+                <pre><code>php artisan migrate</code></pre>
+                <p>This creates all tables in your database automatically.</p>
+
+                <h4>Fresh Database for Testing</h4>
+                <pre><code>php artisan migrate:fresh</code></pre>
+                <div class="warning-box">
+                    <strong>Warning:</strong> This command drops all tables and recreates them. Only use on development/testing environments!
+                </div>
+
+                <h4>Rollback Last Migration</h4>
+                <pre><code>php artisan migrate:rollback</code></pre>
+
+                <h4>Check Migration Status</h4>
+                <pre><code>php artisan migrate:status</code></pre>
+
+                <h4>Run Specific Migration</h4>
+                <pre><code>php artisan migrate --path=database/migrations/filename.php</code></pre>
+
+                <div class="info-box">
+                    <strong>For Existing Database:</strong> If you already imported the SQL file, you don't need to run migrations. They're provided for documentation and new environments only.
+                </div>
+
+                <h3>Migration Benefits</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Development</h4>
+                        <ul style="margin-left: 20px;">
+                            <li>Version control integration</li>
+                            <li>Team collaboration</li>
+                            <li>Environment consistency</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Deployment</h4>
+                        <ul style="margin-left: 20px;">
+                            <li>Automated database setup</li>
+                            <li>Production deployment</li>
+                            <li>Database updates</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Troubleshooting Section -->
+            <div id="troubleshooting" class="section">
+                <h2><i class="fas fa-tools"></i> Troubleshooting</h2>
+                
+                <h3>Common Issues & Solutions</h3>
+
+                <div class="step-card">
+                    <h4>❌ 500 Internal Server Error</h4>
+                    <p><strong>Causes & Solutions:</strong></p>
+                    <ul>
+                        <li><strong>Permission Issues:</strong>
+                            <pre><code>chmod -R 775 storage bootstrap/cache</code></pre>
+                        </li>
+                        <li><strong>Cache Issues:</strong>
+                            <pre><code>php artisan config:clear
+php artisan cache:clear
+php artisan view:clear
+php artisan route:clear</code></pre>
+                        </li>
+                        <li><strong>Check Error Logs:</strong> <code>storage/logs/laravel.log</code></li>
+                        <li><strong>Missing APP_KEY:</strong> Run <code>php artisan key:generate</code></li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h4>❌ Database Connection Error</h4>
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Verify database credentials in <code>.env</code> file</li>
+                        <li>Ensure database exists and user has proper privileges</li>
+                        <li>Check if MySQL service is running</li>
+                        <li>Try <code>DB_HOST=localhost</code> instead of <code>127.0.0.1</code> or vice versa</li>
+                        <li>Ensure database port (3306) is correct</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h4>❌ Blank Page / White Screen</h4>
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Check PHP error logs</li>
+                        <li>Ensure <code>.env</code> file exists and is properly configured</li>
+                        <li>Run: <code>php artisan key:generate</code></li>
+                        <li>Clear all caches (see above)</li>
+                        <li>Check file permissions for <code>storage/</code> and <code>bootstrap/cache/</code></li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h4>❌ Images Not Uploading</h4>
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Check <code>public/</code> directory permissions (755 or 775)</li>
+                        <li>Increase <code>upload_max_filesize</code> in <code>php.ini</code> (e.g., 20M)</li>
+                        <li>Increase <code>post_max_size</code> in <code>php.ini</code> (e.g., 25M)</li>
+                        <li>Ensure <code>storage/</code> is writable</li>
+                        <li>Create storage link: Visit <code>http://yourdomain.com/storage-link</code></li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h4>❌ Emails Not Sending</h4>
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Verify MAIL settings in <code>.env</code> file</li>
+                        <li>Test SMTP credentials using a tool like Mailtrap</li>
+                        <li>Check <code>storage/logs/laravel.log</code> for email errors</li>
+                        <li>Ensure port 587 or 465 is not blocked by firewall</li>
+                        <li>For Gmail: Use "App Password" not regular password (enable 2FA first)</li>
+                        <li>Verify your email provider allows SMTP access</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h4>❌ Payment Gateway Not Working</h4>
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Verify API credentials are correct in admin settings</li>
+                        <li>Ensure gateway is enabled in admin panel</li>
+                        <li>Check if in test/sandbox mode for testing</li>
+                        <li>Review gateway error logs in Laravel logs</li>
+                        <li>Verify webhook URLs are configured (if required)</li>
+                        <li>Ensure SSL certificate is installed (required for live payments)</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h4>❌ Flight Search Not Working (Duffel API)</h4>
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Verify Duffel API token in admin settings</li>
+                        <li>Check if API token is active and not expired</li>
+                        <li>Ensure airports are properly configured in database</li>
+                        <li>Check Laravel logs for API error messages</li>
+                        <li>Verify your Duffel account has sufficient credits/access</li>
+                    </ul>
+                </div>
+
+                <h3>Maintenance Commands</h3>
+                <p>Useful commands for maintaining your installation:</p>
+
+                <h4>Clear All Caches</h4>
+                <pre><code>php artisan optimize:clear
+php artisan config:clear
+php artisan cache:clear
+php artisan view:clear
+php artisan route:clear</code></pre>
+
+                <h4>Optimize for Production</h4>
+                <pre><code>php artisan config:cache
+php artisan route:cache
+php artisan view:cache</code></pre>
+
+                <h4>Check System Status</h4>
+                <pre><code>php artisan about</code></pre>
+
+                <h4>Test Database Connection</h4>
+                <pre><code>php artisan tinker
+DB::connection()->getPdo();</code></pre>
+
+                <div class="warning-box">
+                    <strong>Production Tip:</strong> Always run optimization commands after deploying updates to production for better performance. Never run <code>migrate:fresh</code> on production!
+                </div>
+
+                <div class="info-box">
+                    <strong>Still Having Issues?</strong> Check the <code>storage/logs/laravel.log</code> file for detailed error messages. Most errors are logged there with stack traces to help identify the problem.
+                </div>
+            </div>
+
+            <!-- New Updates Section -->
+            <div id="new-updates" class="section">
+                <h2><i class="fas fa-star"></i> New Updates - Version 4.1</h2>
+                
+                <div class="success-box">
+                    <h3><i class="fas fa-check-circle"></i> Major Updates in Version 4.1</h3>
+                    <p>Version 4.1 introduces significant enhancements to the flight booking system with passport information collection and smart age validation.</p>
+                </div>
+
+                <h3><i class="fas fa-passport"></i> 1. Passport Information Collection</h3>
+                
+                <p>The system now collects complete passport information for all passengers (adults, children, and infants) during flight booking.</p>
+
+                <h4><i class="fas fa-list"></i> Required Passport Fields</h4>
+                <p>The following 5 fields are now <strong>required</strong> for each passenger:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field Name</th>
+                            <th>Type</th>
+                            <th>Validation</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Passport Number</strong></td>
+                            <td>String</td>
+                            <td>Max 50 characters</td>
+                            <td>The passport number as it appears on the passport</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Passport Issue Date</strong></td>
+                            <td>Date</td>
+                            <td>Must be before today</td>
+                            <td>Date the passport was issued</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Passport Expiry Date</strong></td>
+                            <td>Date</td>
+                            <td>Must be after today</td>
+                            <td>Date the passport expires</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Passport Issuing Country</strong></td>
+                            <td>Country ID</td>
+                            <td>Must exist in countries table</td>
+                            <td>The country that issued the passport</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Country of Residence</strong></td>
+                            <td>Country ID</td>
+                            <td>Must exist in countries table</td>
+                            <td>Passenger's country of residence</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4><i class="fas fa-desktop"></i> Where Passport Info Appears</h4>
+                <ul>
+                    <li><strong>Booking Form:</strong> Input fields during booking process</li>
+                    <li><strong>Booking Details Page:</strong> Full passport information display</li>
+                    <li><strong>User PDF Download:</strong> Included in booking confirmation PDF</li>
+                    <li><strong>Admin Order Details:</strong> View passport info in admin panel</li>
+                    <li><strong>Admin PDF Download:</strong> Included in admin PDF ticket</li>
+                </ul>
+
+                <h4><i class="fas fa-code"></i> Data Storage</h4>
+                <p>All passport data is stored in the existing <code>passenger_details</code> JSON column in the <code>flight_bookings</code> table. No database migration is required!</p>
+                
+                <pre><code class="language-json">{
+  "pas_0000AzdG1RvyfvV6hLTiHi": {
+    "title": "mr",
+    "given_name": "John",
+    "family_name": "Doe",
+    "email": "john@example.com",
+    "phone_number": "1234567890",
+    "phonecode": "1",
+    "born_on": "1990-01-01",
+    "gender": "m",
+    "passport_number": "AB1234567",
+    "passport_issue_date": "2020-01-01",
+    "passport_expiry_date": "2030-12-31",
+    "passport_issuing_country": 1,
+    "country_of_residence": 1
+  }
+}</code></pre>
+
+                <h4><i class="fas fa-language"></i> Multi-Language Support</h4>
+                <p>All passport field labels are translatable in 3 languages:</p>
+                <ul>
+                    <li><strong>English (en)</strong> - Passport Number, Passport Issue Date, etc.</li>
+                    <li><strong>Arabic (ar)</strong> - رقم الجواز، تاريخ إصدار الجواز، إلخ</li>
+                    <li><strong>Spanish (es)</strong> - Número de pasaporte, Fecha de emisión, etc.</li>
+                </ul>
+
+                <h3><i class="fas fa-birthday-cake"></i> 2. Age-Based Date Validation</h3>
+                
+                <p>Smart age-based date of birth validation ensures passengers enter correct birth dates based on their passenger type.</p>
+
+                <h4><i class="fas fa-calendar-alt"></i> Validation Rules</h4>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
+                        <h4>Adult Passengers</h4>
+                        <p><strong>Age Requirement:</strong> 18-100 years old</p>
+                        <p><strong>Date Range:</strong> From 100 years ago to 18 years ago</p>
+                        <p><strong>Example (Oct 27, 2025):</strong></p>
+                        <p>Can select DOB between:<br>
+                        <strong>Oct 27, 1925</strong> to <strong>Oct 27, 2007</strong></p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-child"></i></div>
+                        <h4>Children/Infants</h4>
+                        <p><strong>Age Requirement:</strong> Under 18 years old</p>
+                        <p><strong>Date Range:</strong> From 18 years ago to today</p>
+                        <p><strong>Example (Oct 27, 2025):</strong></p>
+                        <p>Can select DOB between:<br>
+                        <strong>Oct 27, 2007</strong> to <strong>Oct 27, 2025</strong></p>
+                    </div>
+                </div>
+
+                <h4><i class="fas fa-desktop"></i> Frontend Implementation</h4>
+                <p>The date picker automatically adjusts its min/max dates based on passenger type:</p>
+                <pre><code class="language-html">&lt;!-- For Adults --&gt;
+&lt;input type="date" 
+       min="1925-10-27"    &lt;!-- 100 years ago --&gt;
+       max="2007-10-27"    &lt;!-- 18 years ago --&gt;
+       required&gt;
+
+&lt;!-- For Children --&gt;
+&lt;input type="date" 
+       min="2007-10-27"    &lt;!-- 18 years ago --&gt;
+       max="2025-10-27"    &lt;!-- Today --&gt;
+       required&gt;</code></pre>
+
+                <h4><i class="fas fa-server"></i> Backend Validation</h4>
+                <p>Server-side validation ensures data integrity even if frontend validation is bypassed:</p>
+                <pre><code class="language-php">// For Adults
+'born_on' => 'required|date|before_or_equal:18_years_ago|after_or_equal:100_years_ago'
+
+// For Children
+'born_on' => 'required|date|before_or_equal:today|after_or_equal:18_years_ago'</code></pre>
+
+                <h4><i class="fas fa-check-circle"></i> Benefits</h4>
+                <ul>
+                    <li>✅ Prevents booking errors before form submission</li>
+                    <li>✅ Improves user experience with appropriate date ranges</li>
+                    <li>✅ Data validation on both frontend and backend</li>
+                    <li>✅ Supports newborns (children can be born today)</li>
+                    <li>✅ Handles elderly passengers (up to 100 years old)</li>
+                </ul>
+
+                <h3><i class="fas fa-tasks"></i> Testing the New Features</h3>
+                
+                <div class="step-card">
+                    <h4>Test Case 1: Adult Passenger with Passport</h4>
+                    <ol>
+                        <li>Search for a flight with 1 adult</li>
+                        <li>Fill in passenger details</li>
+                        <li>Try to select date of birth - should be limited to 18-100 years old</li>
+                        <li>Fill in all 5 passport fields</li>
+                        <li>Submit booking</li>
+                        <li><strong>Expected:</strong> Booking successful with passport data saved</li>
+                    </ol>
+                </div>
+
+                <div class="step-card">
+                    <h4>Test Case 2: Child Passenger</h4>
+                    <ol>
+                        <li>Search for a flight with 1 child</li>
+                        <li>Try to select date of birth</li>
+                        <li><strong>Expected:</strong> Can select any date up to today (including today)</li>
+                        <li><strong>Expected:</strong> Cannot select dates older than 18 years ago</li>
+                        <li>Complete passport fields and submit</li>
+                    </ol>
+                </div>
+
+                <div class="step-card">
+                    <h4>Test Case 3: Verify Passport Display</h4>
+                    <ol>
+                        <li>Complete a flight booking</li>
+                        <li>Go to booking details page</li>
+                        <li>Download user PDF</li>
+                        <li>Check admin panel for booking</li>
+                        <li>Download admin PDF</li>
+                        <li><strong>Expected:</strong> All pages show complete passport information</li>
+                    </ol>
+                </div>
+
+                <div class="info-box">
+                    <strong><i class="fas fa-info-circle"></i> Note:</strong> These features are fully integrated with the existing flight booking system and work seamlessly with all payment gateways. The validation works on both frontend and backend to ensure data integrity.
+                </div>
+            </div>
+            
+            <!-- Changelog Section -->
+            <div id="changelog" class="section">
+                <h2><i class="fas fa-history"></i> Changelog</h2>
+                
+                <div class="changelog-item">
+                    <div class="changelog-date"><i class="far fa-calendar"></i> Version 4.1 - October 27, 2025</div>
+                    <h4><span class="tag tag-new">NEW</span> Passport Information Collection</h4>
+                    <ul>
+                        <li>Added 5 passport fields (Number, Issue Date, Expiry Date, Issuing Country, Country of Residence)</li>
+                        <li>Integrated with booking form and all display pages</li>
+                        <li>Added to user and admin PDF downloads</li>
+                        <li>Complete API documentation for mobile apps</li>
+                    </ul>
+                    <h4><span class="tag tag-new">NEW</span> Age-Based Date Validation</h4>
+                    <ul>
+                        <li>Adults must be 18-100 years old</li>
+                        <li>Children must be under 18 years old</li>
+                        <li>Dynamic date picker limits based on passenger type</li>
+                        <li>Server-side validation for data integrity</li>
+                    </ul>
+                    <h4><span class="tag tag-update">UPDATED</span> API Endpoints</h4>
+                    <ul>
+                        <li>Updated booking API to require passport fields</li>
+                        <li>Added age-based DOB validation in API</li>
+                        <li>Complete mobile app integration guide with React Native & Flutter examples</li>
+                    </ul>
+                    <h4><span class="tag tag-fix">FIXED</span> Bug Fixes</h4>
+                    <ul>
+                        <li>Fixed optional add-ons price update issue</li>
+                        <li>Fixed PDF generation errors</li>
+                        <li>Fixed passenger loop iteration issues</li>
+                    </ul>
+                </div>
+
+                <div class="changelog-item">
+                    <div class="changelog-date"><i class="far fa-calendar"></i> Version 4.0 - September 2, 2025</div>
+                    <h4><span class="tag tag-new">NEW</span> Migration System</h4>
+                    <ul>
+                        <li>Added 17 Laravel migration files</li>
+                        <li>Replaced manual SQL imports with version-controlled migrations</li>
+                        <li>Improved team collaboration and deployment</li>
+                    </ul>
+                    <h4><span class="tag tag-new">NEW</span> Enhanced Multilingual System</h4>
+                    <ul>
+                        <li>Complete translation system for all content</li>
+                        <li>RTL language support (Arabic, Hebrew, etc.)</li>
+                        <li>Dynamic language switching with flag images</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Support Section -->
+            <div id="support" class="section">
+                <h2><i class="fas fa-life-ring"></i> Support & Resources</h2>
+                
+                <h3><i class="fas fa-book"></i> Documentation Files</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-bookmark"></i></div>
+                        <h4>API_DOCUMENTATION.md</h4>
+                        <p>Complete API reference with all endpoints and request/response formats</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h4>API_PASSPORT_UPDATE.md</h4>
+                        <p>Mobile app integration guide with React Native and Flutter examples</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-code"></i></div>
+                        <h4>API_QUICK_REFERENCE.md</h4>
+                        <p>Quick reference for API endpoints and validation rules</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
+                        <h4>COMPLETE_UPDATE_SUMMARY.md</h4>
+                        <p>Complete summary of all changes in version 4.1</p>
+                    </div>
+                </div>
+
+                <div class="alert">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Important Notice</h4>
+                    <p><strong>Customization Support:</strong> The code is provided "as is". Customizing code and design-related issues can be done as freelance work on a $10-40 hourly rate only with PayPal and/or Western Union, if Travel In is available.</p>
+                    <p><strong>For Beginners:</strong> If you are new to programming, please understand that I cannot fix your site for free. I suggest reading documentation available online regarding using PHP, server requirements, Laravel framework, etc.</p>
+                </div>
+
+                <h3><i class="fas fa-envelope"></i> Getting Help</h3>
+                <ul>
+                    <li><strong>Item Discussion:</strong> Visit the CodeCanyon item discussion section</li>
+                    <li><strong>Documentation:</strong> Read all documentation files thoroughly</li>
+                    <li><strong>Code Issues:</strong> Check code comments for implementation details</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked nav item
+            event.currentTarget.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
+
+
+
+
