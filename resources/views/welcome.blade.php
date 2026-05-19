@@ -30,152 +30,300 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="flightsearch" role="tabpanel"
                             aria-labelledby="flight-tab" tabindex="0">
-                            <form action="{{ url('/flights/search') }}" method="GET">
-                                <div class="searchintbox">
-                                    <div class="tripetype" role="group">
-                                        <input type="radio" class="btn-check" name="triptype" id="onewayflight"
-                                            value="oneway" checked>
-                                        <label class="btn btn-outline-primary" for="onewayflight">{{ __('frontend.one_way') }}</label>
-                                        <input type="radio" class="btn-check" name="triptype" id="twowayflight"
-                                            value="twoway">
-                                        <label class="btn btn-outline-primary" for="twowayflight">{{ __('frontend.round_trip') }}</label>
-                                        <input type="radio" class="btn-check" name="triptype" id="Multi-city"
-                                            value="Multicity">
-                                        <label class="btn btn-outline-primary" for="Multi-city">{{ __('frontend.multi_city') }}</label>
-                                    </div>
-                                    @php
-                                        $slices = request('slices');
-                                    @endphp
-                                    <div class="row single-city">
-                                        <div class="col">
-                                            <div class="mt-3">
-                                                <label>{{ __('frontend.from') }}</label>
-                                                <input type="text" class="form-control from_location"
-                                                    name="slices[0][from_location]" id="from_location"
-                                                    placeholder="{{ request('from_type') == 'code' ? 'e.g. LHR' : 'e.g. London' }}"
-                                                    value="{{ $slices[0]['from_location'] ?? '' }}">
-                                                <input type="hidden" name="slices[0][from]" class="from_code"
-                                                    id="from_code" value="{{ $slices[0]['from'] ?? '' }}">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="mt-3">
-                                                <label>{{ __('frontend.to') }}</label>
-                                                <input type="text" class="form-control to_location"
-                                                    name="slices[0][to_location]" id="to_location"
-                                                    placeholder="{{ request('to_type') == 'code' ? 'e.g. JFK' : 'e.g. New York' }}"
-                                                    value="{{ $slices[0]['to_location'] ?? '' }}">
-                                                <input type="hidden" name="slices[0][to]" id="to_code"
-                                                    class="to_code" value="{{ $slices[0]['to'] ?? '' }}">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="mt-3">
-                                                <label>{{ __('frontend.travelling_on') }}</label>
-                                                <input type="text" name="slices[0][travelling_date]"
-                                                    id="travelling_date" class="form-control travelling_date"
-                                                    placeholder="{{ __('frontend.select_from_date') }}"
-                                                    value="{{ $slices[0]['travelling_date'] ?? '' }}"
-                                                    autocomplete="off">
-                                            </div>
-                                        </div>
-                                        <div class="col-auto hidden-button"
-                                            @if (request('triptype') != 'Multicity') style="display: none;" @endif>
-                                            <div class="mt-3">
-                                                <button type="button"
-                                                    class="btn btn-outline-danger btn-sm remove-city w-100"
-                                                    style="visibility: hidden;" title="Remove this city">
-                                                    &times;
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="col return-date"
-                                            @if (request('triptype') != 'twoway') style="display: none;" @endif>
-                                            <div class="mt-3">
-                                                <label>{{ __('frontend.return') }}</label>
-                                                <input name="return_date" type="text" id="return_date"
-                                                    class="form-control" placeholder="{{ __('frontend.select_return_date') }}"
-                                                    value="{{ request('return_date') }}" autocomplete="off">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="multiple-city">
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-md-3 mutiple-button me-auto" @if (request('triptype') != 'Multicity') style="display: none;" @endif>
-                                           
-                                                <div class="addmoreflight">
-                                                    <button type="button" id="add-city" class="btn btn-sec">
-                                                        {{ __('frontend.add_flight') }}
-                                                    </button>
-                                                </div>
-                                           
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="mt-3">
-                                                <label>{{ __('frontend.cabin_class') }}</label>
-                                                <select class="form-control" name="cabin_class">
-                                                    <option value="">{{ __('frontend.any_class') }}</option>
-                                                    <option value="economy"
-                                                        {{ request('cabin_class') == 'economy' ? 'selected' : '' }}>
-                                                        {{ __('frontend.economy') }}</option>
-                                                    <option value="premium_economy"
-                                                        {{ request('cabin_class') == 'premium_economy' ? 'selected' : '' }}>
-                                                        {{ __('frontend.premium_economy') }}</option>
-                                                    <option value="business"
-                                                        {{ request('cabin_class') == 'business' ? 'selected' : '' }}>
-                                                        {{ __('frontend.business') }}</option>
-                                                    <option value="first"
-                                                        {{ request('cabin_class') == 'first' ? 'selected' : '' }}>
-                                                        {{ __('frontend.first_class') }}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="mt-3">
-                                                <label>{{ __('frontend.adults') }}</label>
-                                                <input type="number" class="form-control" name="adults"
-                                                    min="1" max="9"
-                                                    value="{{ request('adults', 1) }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="mt-3">
-                                                <label>{{ __('frontend.children') }}</label>
-                                                <input type="number" class="form-control" name="children"
-                                                    min="0" max="9"
-                                                    value="{{ request('children', 0) }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2 ms-auto text-right mt-3"><label>&nbsp;</label> <button
-                                                class="btn btn-primary d-block w-100">{{ __('frontend.search') }}
-                                            </button></div>
-                                    </div>
-                                </div>
-                            </form>
+                           <form action="{{ url('/flights/search') }}" method="GET">
+
+    <div class="searchintbox rounded-4 shadow-lg p-4"
+         style="
+            background: rgba(255, 255, 255, 0.54);
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+         ">
+
+        <!-- TRIP TYPE -->
+        <div class="tripetype mb-3" role="group">
+
+            <input type="radio" class="btn-check" name="triptype"
+                   id="onewayflight" value="oneway" checked>
+
+            <label class="btn btn-outline-light rounded-pill px-4"
+                   for="onewayflight">
+                {{ __('frontend.one_way') }}
+            </label>
+
+            <input type="radio" class="btn-check" name="triptype"
+                   id="twowayflight" value="twoway">
+
+            <label class="btn btn-outline-light rounded-pill px-4"
+                   for="twowayflight">
+                {{ __('frontend.round_trip') }}
+            </label>
+
+            <input type="radio" class="btn-check" name="triptype"
+                   id="Multi-city" value="Multicity">
+
+            <label class="btn btn-outline-light rounded-pill px-4"
+                   for="Multi-city">
+                {{ __('frontend.multi_city') }}
+            </label>
+
+        </div>
+
+        @php
+            $slices = request('slices');
+        @endphp
+
+        <!-- SINGLE CITY -->
+        <div class="row single-city g-3">
+
+            <!-- FROM -->
+            <div class="col-md">
+
+                <label class="text-white mb-2">
+                    {{ __('frontend.from') }}
+                </label>
+
+                <input type="text"
+                       class="form-control bg-transparent text-white border-light from_location"
+                       name="slices[0][from_location]"
+                       id="from_location"
+                       placeholder="{{ request('from_type') == 'code' ? 'e.g. LHR' : 'e.g. London' }}"
+                       value="{{ $slices[0]['from_location'] ?? '' }}"
+                       style="height: 50px;">
+
+                <input type="hidden"
+                       name="slices[0][from]"
+                       class="from_code"
+                       id="from_code"
+                       value="{{ $slices[0]['from'] ?? '' }}">
+
+            </div>
+
+            <!-- TO -->
+            <div class="col-md">
+
+                <label class="text-white mb-2">
+                    {{ __('frontend.to') }}
+                </label>
+
+                <input type="text"
+                       class="form-control bg-transparent text-white border-light to_location"
+                       name="slices[0][to_location]"
+                       id="to_location"
+                       placeholder="{{ request('to_type') == 'code' ? 'e.g. JFK' : 'e.g. New York' }}"
+                       value="{{ $slices[0]['to_location'] ?? '' }}"
+                       style="height: 50px;">
+
+                <input type="hidden"
+                       name="slices[0][to]"
+                       id="to_code"
+                       class="to_code"
+                       value="{{ $slices[0]['to'] ?? '' }}">
+
+            </div>
+
+            <!-- DATE -->
+            <div class="col-md">
+
+                <label class="text-white mb-2">
+                    {{ __('frontend.travelling_on') }}
+                </label>
+
+                <input type="text"
+                       name="slices[0][travelling_date]"
+                       id="travelling_date"
+                       class="form-control bg-transparent text-white border-light travelling_date"
+                       placeholder="{{ __('frontend.select_from_date') }}"
+                       value="{{ $slices[0]['travelling_date'] ?? '' }}"
+                       autocomplete="off"
+                       style="height: 50px;">
+
+            </div>
+
+            <!-- RETURN -->
+            <div class="col-md return-date"
+                 @if (request('triptype') != 'twoway') style="display:none;" @endif>
+
+                <label class="text-white mb-2">
+                    {{ __('frontend.return') }}
+                </label>
+
+                <input name="return_date"
+                       type="text"
+                       id="return_date"
+                       class="form-control bg-transparent text-white border-light"
+                       placeholder="{{ __('frontend.select_return_date') }}"
+                       value="{{ request('return_date') }}"
+                       autocomplete="off"
+                       style="height: 50px;">
+
+            </div>
+
+        </div>
+
+        <!-- MULTI CITY -->
+        <div class="multiple-city mt-3"></div>
+
+        <!-- BOTTOM SECTION -->
+        <div class="row mt-4 g-3 align-items-end">
+
+            <!-- ADD FLIGHT -->
+            <div class="col-md-3 mutiple-button me-auto"
+                 @if (request('triptype') != 'Multicity') style="display:none;" @endif>
+
+                <button type="button"
+                        id="add-city"
+                        class="btn btn-outline-light rounded-pill px-4 w-100">
+                    {{ __('frontend.add_flight') }}
+                </button>
+
+            </div>
+
+            <!-- CABIN -->
+            <div class="col-md-2">
+
+                <label class="text-white mb-2">
+                    {{ __('frontend.cabin_class') }}
+                </label>
+
+                <select class="form-control bg-transparent text-white border-light"
+                        name="cabin_class"
+                        style="height: 50px;">
+
+                    <option value="" class="text-dark">
+                        {{ __('frontend.any_class') }}
+                    </option>
+
+                    <option value="economy" class="text-dark">
+                        {{ __('frontend.economy') }}
+                    </option>
+
+                    <option value="premium_economy" class="text-dark">
+                        {{ __('frontend.premium_economy') }}
+                    </option>
+
+                    <option value="business" class="text-dark">
+                        {{ __('frontend.business') }}
+                    </option>
+
+                    <option value="first" class="text-dark">
+                        {{ __('frontend.first_class') }}
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- ADULT -->
+            <div class="col-md-2">
+
+                <label class="text-white mb-2">
+                    {{ __('frontend.adults') }}
+                </label>
+
+                <input type="number"
+                       class="form-control bg-transparent text-white border-light"
+                       name="adults"
+                       min="1"
+                       max="9"
+                       value="{{ request('adults', 1) }}"
+                       style="height: 50px;">
+
+            </div>
+
+            <!-- CHILD -->
+            <div class="col-md-2">
+
+                <label class="text-white mb-2">
+                    {{ __('frontend.children') }}
+                </label>
+
+                <input type="number"
+                       class="form-control bg-transparent text-white border-light"
+                       name="children"
+                       min="0"
+                       max="9"
+                       value="{{ request('children', 0) }}"
+                       style="height: 50px;">
+
+            </div>
+
+            <!-- SEARCH -->
+            <div class="col-md-2">
+
+                <button class="btn btn-primary w-100 rounded-pill shadow"
+                        style="height: 50px;">
+                    <i class="fas fa-search me-2"></i>
+                    {{ __('frontend.search') }}
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
                         </div>
                         <div class="tab-pane fade" id="hotelsearch" role="tabpanel" aria-labelledby="hotel-tab"
                             tabindex="0">
-                            <form method="get" action="{{ url('/hotels') }}">
-                                <div class="searchintbox">
-                                    <div class="row">
-                                        <div class="col-lg-7">
-                                            <div class="mb-3"><label for="">{{ __('frontend.destination') }}</label><input
-                                                    type="text" class="form-control" name="keyword"
-                                                    placeholder="{{ __('frontend.destination_placeholder') }}"></div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="mb-3"><label for="">{{ __('frontend.when') }}</label><input
-                                                    type="date" class="form-control" name=""
-                                                    placeholder="{{ __('frontend.when') }}"></div>
-                                        </div>
-                                        <div class="col-lg-2"><label for="">&nbsp;</label><button
-                                                class="btn btn-sec w-100" type="submit"
-                                                id="button-addon2">{{ __('frontend.search') }}</button></div>
-                                    </div>
-                                </div>
-                            </form>
+                          <form method="get" action="{{ url('/hotels') }}">
+
+    <div class="searchintbox rounded-4 shadow-lg p-4"
+         style=" background: rgba(255, 255, 255, 0.52)">
+
+        <div class="row align-items-end g-3">
+
+            <!-- DESTINATION -->
+            <div class="col-lg-7">
+
+                <div>
+                    <label class="fw-semibold text-dark mb-2">
+                        {{ __('frontend.destination') }}
+                    </label>
+
+                    <input type="text"
+                           class="form-control border-0 shadow-sm"
+                           name="keyword"
+                           placeholder="{{ __('frontend.destination_placeholder') }}"
+                           style="height: 50px;">
+                </div>
+
+            </div>
+
+            <!-- DATE -->
+            <div class="col-lg-3">
+
+                <div>
+                    <label class="fw-semibold text-dark mb-2">
+                        {{ __('frontend.when') }}
+                    </label>
+
+                    <input type="date"
+                           class="form-control border-0 shadow-sm"
+                           name=""
+                           placeholder="{{ __('frontend.when') }}"
+                           style="height: 50px;">
+                </div>
+
+            </div>
+
+            <!-- BUTTON -->
+            <div class="col-lg-2">
+
+                <button class="btn btn-primary w-100 shadow-sm"
+                        type="submit"
+                        style="height: 50px;">
+                    <i class="fas fa-search me-2"></i>
+                    {{ __('frontend.search') }}
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
                         </div>
                     </div>
                     
