@@ -19,11 +19,13 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#hotelsearch"
-                                type="button" role="tab" aria-controls="hotel-tab-pane" aria-selected="false"><i
+                                type="button" role="tab" aria-controls="hotel-tab-pane" aria-selected="false"
+                                style="background-color: #0e52a5; border-color: #0e52a5; color: #fff;"><i
                                     class="fas fa-hotel"></i> {{ __('frontend.hotels') }}</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profile-tab" href="{{ url('/tours') }}"><i
+                            <a class="nav-link" id="profile-tab" href="{{ url('/tours') }}"
+                                style="background-color: #0e52a5; border-color: #0e52a5; color: #fff;"><i
                                     class="fas fa-tree"></i> {{ __('frontend.tours') }}</a>
                         </li>
                     </ul>
@@ -34,9 +36,9 @@
 
     <div class="searchintbox rounded-4 shadow-lg p-4"
          style="
-            background: rgba(255, 255, 255, 0.54);
+            background: rgba(0, 0, 0, 0.69);
             border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.44);
          ">
 
         <!-- TRIP TYPE -->
@@ -53,7 +55,7 @@
             <input type="radio" class="btn-check" name="triptype"
                    id="twowayflight" value="twoway">
 
-            <label class="btn btn-outline-light rounded-pill px-4"
+            <label class="btn btn-outline-light text-white rounded-pill px-4"
                    for="twowayflight">
                 {{ __('frontend.round_trip') }}
             </label>
@@ -61,7 +63,7 @@
             <input type="radio" class="btn-check" name="triptype"
                    id="Multi-city" value="Multicity">
 
-            <label class="btn btn-outline-light rounded-pill px-4"
+            <label class="btn btn-outline-light text-white rounded-pill px-4"
                    for="Multi-city">
                 {{ __('frontend.multi_city') }}
             </label>
@@ -73,53 +75,67 @@
         @endphp
 
         <!-- SINGLE CITY -->
-        <div class="row single-city g-3">
+        <div class="row single-city  text-white g-3">
 
             <!-- FROM -->
             <div class="col-md">
 
-                <label class="text-white mb-2">
-                    {{ __('frontend.from') }}
-                </label>
+    <label class="text-white mb-2">
+        {{ __('frontend.from') }}
+    </label>
 
-                <input type="text"
-                       class="form-control bg-transparent text-white border-light from_location"
-                       name="slices[0][from_location]"
-                       id="from_location"
-                       placeholder="{{ request('from_type') == 'code' ? 'e.g. LHR' : 'e.g. London' }}"
-                       value="{{ $slices[0]['from_location'] ?? '' }}"
-                       style="height: 50px;">
+    <input type="text"
+           class="form-control bg-transparent text-white border-light from_location custom-placeholder"
+           name="slices[0][from_location]"
+           id="from_location"
+           placeholder="{{ request('from_type') == 'code' ? 'e.g. LHR' : 'e.g. London' }}"
+           value="{{ $slices[0]['from_location'] ?? '' }}"
+           style="height: 50px;">
 
-                <input type="hidden"
-                       name="slices[0][from]"
-                       class="from_code"
-                       id="from_code"
-                       value="{{ $slices[0]['from'] ?? '' }}">
+    <input type="hidden"
+           name="slices[0][from]"
+           class="from_code"
+           id="from_code"
+           value="{{ $slices[0]['from'] ?? '' }}">
 
-            </div>
+</div>
+
+<style>
+    .custom-placeholder::placeholder {
+        color: #d1d5db !important; /* light gray */
+        opacity: 1;
+    }
+</style>
 
             <!-- TO -->
-            <div class="col-md">
+           <div class="col-md">
 
-                <label class="text-white mb-2">
-                    {{ __('frontend.to') }}
-                </label>
+    <label class="text-white mb-2">
+        {{ __('frontend.to') }}
+    </label>
 
-                <input type="text"
-                       class="form-control bg-transparent text-white border-light to_location"
-                       name="slices[0][to_location]"
-                       id="to_location"
-                       placeholder="{{ request('to_type') == 'code' ? 'e.g. JFK' : 'e.g. New York' }}"
-                       value="{{ $slices[0]['to_location'] ?? '' }}"
-                       style="height: 50px;">
+    <input type="text"
+           class="form-control bg-transparent text-white border-light to_location custom-placeholder"
+           name="slices[0][to_location]"
+           id="to_location"
+           placeholder="{{ request('to_type') == 'code' ? 'e.g. JFK' : 'e.g. New York' }}"
+           value="{{ $slices[0]['to_location'] ?? '' }}"
+           style="height: 50px;">
 
-                <input type="hidden"
-                       name="slices[0][to]"
-                       id="to_code"
-                       class="to_code"
-                       value="{{ $slices[0]['to'] ?? '' }}">
+    <input type="hidden"
+           name="slices[0][to]"
+           id="to_code"
+           class="to_code"
+           value="{{ $slices[0]['to'] ?? '' }}">
 
-            </div>
+</div>
+
+<style>
+    .custom-placeholder::placeholder {
+        color: #d1d5db !important; /* light gray */
+        opacity: 1;
+    }
+</style>
 
             <!-- DATE -->
             <div class="col-md">
@@ -129,13 +145,20 @@
                 </label>
 
                 <input type="text"
-                       name="slices[0][travelling_date]"
-                       id="travelling_date"
-                       class="form-control bg-transparent text-white border-light travelling_date"
-                       placeholder="{{ __('frontend.select_from_date') }}"
-                       value="{{ $slices[0]['travelling_date'] ?? '' }}"
-                       autocomplete="off"
-                       style="height: 50px;">
+       name="slices[0][travelling_date]"
+       id="travelling_date"
+       class="form-control bg-transparent text-white border-light travelling_date"
+       placeholder="{{ __('frontend.select_from_date') }}"
+       value="{{ $slices[0]['travelling_date'] ?? '' }}"
+       autocomplete="off"
+       style="height: 50px;">
+
+<style>
+    .travelling_date::placeholder {
+        color: #d1d5db !important; /* light gray */
+        opacity: 1;
+    }
+</style>
 
             </div>
 
@@ -277,7 +300,7 @@
             <div class="col-lg-7">
 
                 <div>
-                    <label class="fw-semibold text-dark mb-2">
+                    <label class="fw-semibold text-white mb-2">
                         {{ __('frontend.destination') }}
                     </label>
 
@@ -294,7 +317,7 @@
             <div class="col-lg-3">
 
                 <div>
-                    <label class="fw-semibold text-dark mb-2">
+                    <label class="fw-semibold text-white mb-2">
                         {{ __('frontend.when') }}
                     </label>
 
@@ -334,7 +357,7 @@
     <!-- Top Destination Section -->
      <div class="container">
      <div class="fade-text">
-                        <h3>{{ $widget->getTranslatedExtraField(2) }}
+                        <h3><span>{{ $widget->getTranslatedExtraField(2) }}</span>
                             <a href="" class="typewrite" data-period="2000"
                                 data-type='[ "{{ $widget->getTranslatedExtraField(3) }}", "{{ $widget->getTranslatedExtraField(4) }}", "{{ $widget->getTranslatedExtraField(5) }}", "{{ $widget->getTranslatedExtraField(6) }}" ]'>
                                 <span class="wrap"></span> </a>
@@ -369,7 +392,7 @@
     </div>
     @if (null !== ($arilines = moduleF(4)))
         <!-- Popular Flights -->
-        <div class="popflights pb-5">
+        <div class="popflights pb-5" style="background: aliceblue;">
             <div class="container">
                 <div class="section-title">
                     <h3>{{ __('frontend.popular_airlines') }}</h3>
@@ -389,29 +412,75 @@
     @endif
     <!-- Widgets -->
     <div class="container pt-5">
-        <div class="row">
-            <div class="col-lg-6">
-                <?php $widget = widget(5); ?>
-                <?php $img = asset('images/' . $widget->extra_image_1); ?>
-                <div class="hotelwidget" style="background: url({{ $img }}) no-repeat;">
-                    <h2>{{ $widget->getTranslatedExtraField(1) }}</h2>
-                    <h3>{{ $widget->getTranslatedDescription() }}</h3>
-                    <a href="#" class="btn btn-sec">{{ __('frontend.book_now') }}</a>
-                </div>
+    <div class="row g-4 justify-content-center">
+
+        <div class="col-lg-5">
+            <?php $widget = widget(5); ?>
+            <?php $img = asset('images/' . $widget->extra_image_1); ?>
+
+            <div class="hotelwidget small-widget"
+                 style="background: url({{ $img }}) no-repeat center center/cover;">
+
+                <h2>{{ $widget->getTranslatedExtraField(1) }}</h2>
+                <h3>{{ $widget->getTranslatedDescription() }}</h3>
+
+                <a href="#" class="btn btn-sec">
+                    {{ __('frontend.book_now') }}
+                </a>
             </div>
-            <div class="col-lg-6">
-                <?php $widget = widget(6); ?>
-                <?php $img = asset('images/' . $widget->extra_image_1); ?>
-                <div class="hotelwidget" style="background: url({{ $img }}) no-repeat;">
-                    <h2>{{ $widget->getTranslatedExtraField(1) }}</h2>
-                    <h3>{{ $widget->getTranslatedDescription() }}</h3>
-                    <a href="#" class="btn btn-sec">{{ __('frontend.book_now') }}</a>
-                </div>
+        </div>
+
+        <div class="col-lg-5">
+            <?php $widget = widget(6); ?>
+            <?php $img = asset('images/' . $widget->extra_image_1); ?>
+
+            <div class="hotelwidget small-widget"
+                 style="background: url({{ $img }}) no-repeat center center/cover;">
+
+                <h2>{{ $widget->getTranslatedExtraField(1) }}</h2>
+                <h3>{{ $widget->getTranslatedDescription() }}</h3>
+
+                <a href="#" class="btn btn-sec">
+                    {{ __('frontend.book_now') }}
+                </a>
             </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .small-widget{
+        height: 220px; /* card height smaller */
+        padding: 30px;
+        border-radius: 16px;
+    }
+
+    .small-widget h2{
+        font-size: 28px;
+    }
+
+    .small-widget h3{
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .small-widget .btn-sec{
+        background: #0e52a5;
+        border-color: #0e52a5;
+        color: #fff;
+    }
+
+    .small-widget .btn-sec:hover{
+        background: #f9c45a;
+        border-color: #f9c45a;
+        color: #fff;
+    }
+</style>
         </div>
     </div>
     <!-- Top Hotels Section -->
-    <div class="parallax-section" id="places">
+    <div class="parallax-section featured-hotels-section" id="places" style="background: aliceblue;">
         <?php $widget = widget(4); ?>
         <div class="container">
             <div class="section-title">
@@ -440,7 +509,7 @@
                                     </div>
                                     <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i>
                                         {{ $hotel->extra_field_18 }}</div>
-                                    <div class="prices">${{ $hotel->extra_field_1 }}</div>
+                                    <div class="prices">৳{{ $hotel->extra_field_1 }}</div>
                                     <div class="meta">
                                         <span title="Hotel Type"><i class="fa fa-hotel" aria-hidden="true"></i>
                                             <strong>{{ title($hotel->extra_field_2) }}</strong></span>
@@ -460,12 +529,7 @@
         </div>
     </div>
 
-    <div class="appwraper text-center">
-        <div class="container">
-            <img src="images/mobile-app.jpg" alt="Mobile App" class="rounded-4">
-        </div>
-    </div>
-
+   
     <!-- Latest Tours Section -->
     <div class="parallax-section" id="latest-tours">
         <div class="container">
@@ -574,7 +638,7 @@
     </div>
 
     <!-- About section -->
-    <div id="about">
+    <div id="about" style="background: aliceblue;">
         <div class="container">
             <div class="about-desc">
                 <div class="row">
@@ -740,11 +804,11 @@
         </div>
     </div>
     <!-- Service Section -->
-    <div id="service" class="parallax-section">
+    <div id="service" class="parallax-section" style="background: aliceblue !important;">
         <?php $widget = widget(19); ?>
         <div class="container">
             <div class="section-title">
-                <h3>{{ $widget->getTranslatedExtraField(1) }}</h3>
+                <h3 style="color: #0e52a5 !important;">{{ $widget->getTranslatedExtraField(1) }}</h3>
                 <p>{{ $widget->getTranslatedDescription() }}</p>
             </div>
             <div class="row">
@@ -837,7 +901,7 @@
         </div>
     </div>
     <!-- Blog Section -->
-    <div class="hmblog parallax-section">
+    <div class="hmblog parallax-section" style="background: aliceblue;">
         <div class="container">
             <!-- SECTION TITLE -->
             <div class="section-title">

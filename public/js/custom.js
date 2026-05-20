@@ -22,8 +22,13 @@
   
 	  initCarousel(".testimonialsList", {
 		loop: true,
-		margin: 30,
+		margin: 2,
 		nav: false,
+		autoplay: true,
+		autoplayTimeout: 4000,
+		autoplaySpeed: 700,
+		autoplayHoverPause: true,
+		smartSpeed: 700,
 		responsive: {
 		  0: { items: 1 },
 		  700: { items: 1 },
@@ -149,6 +154,9 @@
 		};
 		
 		$(selector).owlCarousel(rtlOptions);
+		if (options.autoplay) {
+		  $(selector).trigger('play.owl.autoplay', [options.autoplayTimeout || 4000]);
+		}
 		
 		// Fix RTL positioning issues
 		if (isRTL) {
