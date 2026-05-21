@@ -9,123 +9,355 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
             <!-- Stats Cards Row - Bootstrap Columns with Multiple Colors -->
-            <div class="row mb-4">
-                <!-- Total Revenue -->
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card border-0 shadow-lg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                        <div class="card-body text-white p-4">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="flex-grow-1">
-                                    <h6 class="card-subtitle mb-2 text-white-50 fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">Total Revenue</h6>
-                                    <h2 class="card-title text-white fw-bold mb-1" style="font-size: 1.6rem;">{{ $currencySymbol }} {{ number_format(array_sum($totalRevenue), 2) }}</h2>
-                                    <small class="text-white-75">Last 12 months</small>
-                                </div>
-                                <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                                    <i class="fas fa-dollar-sign text-white" style="font-size: 1.5rem;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+           <div class="row mb-4 g-4">
 
-                <!-- Total Users -->
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card border-0 shadow-lg" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                        <div class="card-body text-white p-4">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="flex-grow-1">
-                                    <h6 class="card-subtitle mb-2 text-white-50 fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">Total Users</h6>
-                                    <h2 class="card-title text-white fw-bold mb-1" style="font-size: 2.5rem;">{{ number_format($total_users) }}</h2>
-                                    <small class="text-white-75">Registered users</small>
-                                </div>
-                                <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                                    <i class="fas fa-users text-white" style="font-size: 1.5rem;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Total Revenue -->
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <a href="#" class="text-decoration-none">
+            <div class="card border-0 shadow-sm rounded-4 h-100"
+                style="min-height:170px;background: linear-gradient(135deg, #eef2ff 0%, #f8fbff 100%); transition:0.3s; cursor:pointer;">
 
-                <!-- Total Hotels -->
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card border-0 shadow-lg" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                        <div class="card-body text-white p-4">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="flex-grow-1">
-                                    <h6 class="card-subtitle mb-2 text-white-50 fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">Total Hotels</h6>
-                                    <h2 class="card-title text-white fw-bold mb-1" style="font-size: 2.5rem;">{{ number_format($total_hotels) }}</h2>
-                                    <small class="text-white-75">Active listings</small>
-                                </div>
-                                <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                                    <i class="fas fa-hotel text-white" style="font-size: 1.5rem;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="card-body p-4 d-flex align-items-center">
 
-                <!-- Total Tours -->
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-                    <div class="card border-0 shadow-lg" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                        <div class="card-body text-white p-4">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="flex-grow-1">
-                                    <h6 class="card-subtitle mb-2 text-white-50 fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">Total Tours</h6>
-                                    <h2 class="card-title text-white fw-bold mb-1" style="font-size: 2.5rem;">{{ number_format($total_tours) }}</h2>
-                                    <small class="text-white-75">Active packages</small>
-                                </div>
-                                <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                                    <i class="fas fa-map-marked-alt text-white" style="font-size: 1.5rem;"></i>
-                                </div>
-                            </div>
+                    <div class="d-flex justify-content-between align-items-center w-100">
+
+                        <div>
+                            <h6 class="text-uppercase text-muted fw-bold mb-2" style="font-size:12px;">
+                                Total Revenue
+                            </h6>
+
+                            <h3 class="fw-bold text-dark mb-1">
+                                {{ $currencySymbol }} {{ number_format(array_sum($totalRevenue), 2) }}
+                            </h3>
+
+                            <small class="text-muted">Last 12 months</small>
                         </div>
+
+                        <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm"
+                            style="width:60px;height:60px;background:#667eea;">
+                            <i class="fas fa-dollar-sign text-white"></i>
+                        </div>
+
                     </div>
+
                 </div>
             </div>
+        </a>
+    </div>
 
-            <!-- Revenue Chart -->
-            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800">Revenue Overview</h3>
-                        <div class="flex items-center space-x-3">
-                            <label for="revenuePeriod" class="text-sm font-medium text-gray-600">Time Period:</label>
-                            <select id="revenuePeriod" class="form-select form-select-sm" style="width: auto; min-width: 120px;">
-                                <option value="12">Last 12 Months</option>
-                                <option value="6">Last 6 Months</option>
-                                <option value="3">Last 3 Months</option>
-                                <option value="1">Last Month</option>
-                            </select>
+
+    <!-- Total Users -->
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <a href="#" class="text-decoration-none">
+            <div class="card border-0 shadow-sm rounded-4 h-100"
+                style="min-height:170px;background: linear-gradient(135deg, #fff0f6 0%, #f8fbff 100%); cursor:pointer;">
+
+                <div class="card-body p-4 d-flex align-items-center">
+
+                    <div class="d-flex justify-content-between align-items-center w-100">
+
+                        <div>
+                            <h6 class="text-uppercase text-muted fw-bold mb-2" style="font-size:12px;">
+                                Total Users
+                            </h6>
+
+                            <h3 class="fw-bold text-dark mb-1">
+                                {{ number_format($total_users) }}
+                            </h3>
+
+                            <small class="text-muted">Registered users</small>
                         </div>
-                    </div>
-                    <div class="chart-container" style="height: 250px;">
-                        <canvas id="revenueChart"></canvas>
-                    </div>
-                </div>
 
-            <!-- Charts Row - 6x6 Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                
+                        <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm"
+                            style="width:60px;height:60px;background:#f5576c;">
+                            <i class="fas fa-users text-white"></i>
+                        </div>
 
-                <!-- Daily Bookings Chart -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800">Daily Bookings</h3>
                     </div>
-                    <div class="chart-container" style="height: 250px;">
-                        <canvas id="dailyBookingsChart"></canvas>
-                    </div>
-                </div>
 
-                <!-- Revenue Distribution Pie Chart -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-gray-800">Revenue Distribution</h3>
-                    </div>
-                    <div class="chart-container" style="height: 250px;">
-                        <canvas id="revenuePieChart"></canvas>
-                    </div>
                 </div>
             </div>
+        </a>
+    </div>
+
+
+    <!-- Total Hotels -->
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <a href="#" class="text-decoration-none">
+            <div class="card border-0 shadow-sm rounded-4 h-100"
+                style="min-height:170px;background: linear-gradient(135deg, #e0f7ff 0%, #f8fbff 100%); cursor:pointer;">
+
+                <div class="card-body p-4 d-flex align-items-center">
+
+                    <div class="d-flex justify-content-between align-items-center w-100">
+
+                        <div>
+                            <h6 class="text-uppercase text-muted fw-bold mb-2" style="font-size:12px;">
+                                Total Hotels
+                            </h6>
+
+                            <h3 class="fw-bold text-dark mb-1">
+                                {{ number_format($total_hotels) }}
+                            </h3>
+
+                            <small class="text-muted">Active listings</small>
+                        </div>
+
+                        <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm"
+                            style="width:60px;height:60px;background:#00c6ff;">
+                            <i class="fas fa-hotel text-white"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+    <!-- Total Tours -->
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <a href="#" class="text-decoration-none">
+            <div class="card border-0 shadow-sm rounded-4 h-100"
+                style="min-height:170px;background: linear-gradient(135deg, #e6fff3 0%, #f8fbff 100%); cursor:pointer;">
+
+                <div class="card-body p-4 d-flex align-items-center">
+
+                    <div class="d-flex justify-content-between align-items-center w-100">
+
+                        <div>
+                            <h6 class="text-uppercase text-muted fw-bold mb-2" style="font-size:12px;">
+                                Total Tours
+                            </h6>
+
+                            <h3 class="fw-bold text-dark mb-1">
+                                {{ number_format($total_tours) }}
+                            </h3>
+
+                            <small class="text-muted">Active packages</small>
+                        </div>
+
+                        <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm"
+                            style="width:60px;height:60px;background:#22c55e;">
+                            <i class="fas fa-map-marked-alt text-white"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+            <!-- Revenue Overview Card -->
+    <div class="card shadow-sm rounded-3 mb-4">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <h5 class="fw-semibold mb-0">Revenue Overview</h5>
+          <div class="d-flex align-items-center gap-2">
+            <label for="revenuePeriod" class="form-label mb-0 text-muted small">Time Period:</label>
+            <select id="revenuePeriod" class="form-select form-select-sm" style="width: auto; min-width: 150px;">
+              <option value="12">Last 12 Months</option>
+              <option value="6">Last 6 Months</option>
+              <option value="3">Last 3 Months</option>
+              <option value="1">Last Month</option>
+            </select>
+          </div>
+        </div>
+ 
+        <!-- Metric Summary -->
+        <div class="row g-3 mb-4">
+          <div class="col-4">
+            <div class="metric-card">
+              <p class="label">Total Revenue</p>
+              <p class="value" id="totalRev">$84,200</p>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="metric-card">
+              <p class="label">Avg / Month</p>
+              <p class="value" id="avgRev">$7,017</p>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="metric-card">
+              <p class="label">Growth</p>
+              <p class="value green">+12.4%</p>
+            </div>
+          </div>
+        </div>
+ 
+        <!-- Revenue Bar Chart -->
+        <div class="chart-wrapper">
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Charts Row -->
+    <div class="row g-4">
+ 
+      <!-- Daily Bookings -->
+      <div class="col-md-6">
+        <div class="card shadow-sm rounded-3 h-100">
+          <div class="card-body p-4">
+            <h6 class="fw-semibold mb-3">Daily Bookings</h6>
+            <div class="chart-wrapper">
+              <canvas id="dailyBookingsChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- Revenue Distribution -->
+      <div class="col-md-6">
+        <div class="card shadow-sm rounded-3 h-100">
+          <div class="card-body p-4">
+            <h6 class="fw-semibold mb-3">Revenue Distribution</h6>
+            <div class="row align-items-center g-0">
+              <div class="col-7">
+                <div class="chart-wrapper">
+                  <canvas id="revenuePieChart"></canvas>
+                </div>
+              </div>
+              <div class="col-5">
+                <div id="pieLegend" class="d-flex flex-column gap-2 ps-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+ 
+  <script>
+    // ── Revenue Bar Chart ──────────────────────────────────────
+    const allMonths  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const allRevenue = [5200, 6100, 5800, 7400, 6900, 8100, 7600, 9200, 8400, 10100, 9600, 9800];
+ 
+    const revCtx = document.getElementById('revenueChart').getContext('2d');
+    const revChart = new Chart(revCtx, {
+      type: 'bar',
+      data: {
+        labels: allMonths,
+        datasets: [{
+          label: 'Revenue',
+          data: allRevenue,
+          backgroundColor: '#B5D4F4',
+          borderColor: '#378ADD',
+          borderWidth: 1.5,
+          borderRadius: 5,
+          hoverBackgroundColor: '#378ADD'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+          y: {
+            grid: { color: 'rgba(0,0,0,0.06)' },
+            ticks: {
+              callback: v => '$' + (v / 1000).toFixed(0) + 'k',
+              font: { size: 11 }
+            }
+          }
+        }
+      }
+    });
+ 
+    function updateRevChart(months) {
+      const n      = parseInt(months);
+      const labels = allMonths.slice(-n);
+      const data   = allRevenue.slice(-n);
+      revChart.data.labels              = labels;
+      revChart.data.datasets[0].data   = data;
+      revChart.update();
+      const total = data.reduce((a, b) => a + b, 0);
+      document.getElementById('totalRev').textContent = '$' + total.toLocaleString();
+      document.getElementById('avgRev').textContent   = '$' + Math.round(total / n).toLocaleString();
+    }
+ 
+    document.getElementById('revenuePeriod').addEventListener('change', e => updateRevChart(e.target.value));
+ 
+    // ── Daily Bookings Line Chart ──────────────────────────────
+    const days     = Array.from({ length: 14 }, (_, i) => {
+      const d = new Date();
+      d.setDate(d.getDate() - 13 + i);
+      return d.toLocaleDateString('en', { month: 'short', day: 'numeric' });
+    });
+    const bookings = [12, 18, 9, 22, 15, 28, 19, 31, 24, 17, 26, 33, 21, 29];
+ 
+    new Chart(document.getElementById('dailyBookingsChart').getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: 'Bookings',
+          data: bookings,
+          borderColor: '#1D9E75',
+          backgroundColor: 'rgba(29,158,117,0.08)',
+          borderWidth: 2,
+          pointBackgroundColor: '#1D9E75',
+          pointRadius: 3,
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false }, ticks: { maxTicksLimit: 7, font: { size: 10 } } },
+          y: { grid: { color: 'rgba(0,0,0,0.06)' }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+ 
+    // ── Revenue Distribution Doughnut Chart ───────────────────
+    const pieColors = ['#378ADD', '#1D9E75', '#D85A30', '#BA7517'];
+    const pieLabels = ['Hotels', 'Flights', 'Tours', 'Car Hire'];
+    const pieData   = [38, 27, 22, 13];
+ 
+    new Chart(document.getElementById('revenuePieChart').getContext('2d'), {
+      type: 'doughnut',
+      data: {
+        labels: pieLabels,
+        datasets: [{
+          data: pieData,
+          backgroundColor: pieColors,
+          borderWidth: 0,
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '68%',
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%' } }
+        }
+      }
+    });
+ 
+    // Pie legend
+    const legendEl = document.getElementById('pieLegend');
+    pieLabels.forEach((label, i) => {
+      legendEl.innerHTML += `
+        <div class="d-flex align-items-center gap-2">
+          <span class="pie-legend-dot" style="background:${pieColors[i]};"></span>
+          <span style="font-size:12px; color:#6c757d;">${label}</span>
+          <span style="font-size:12px; font-weight:600; color:#1a1a2e; margin-left:auto;">${pieData[i]}%</span>
+        </div>`;
+    });
+  </script>
 
            
 

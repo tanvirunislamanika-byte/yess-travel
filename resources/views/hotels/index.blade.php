@@ -250,22 +250,30 @@
 </div>
 
 <!-- Widgets -->
+<!-- Widgets -->
 <div class="container pb-5">
-  <div class="row">
+  <div class="row g-3 align-items-stretch">
+
     <div class="col-lg-6">
-        <div class="hotelwidget">
+        <div class="hotelwidget h-100 p-4 d-flex flex-column justify-content-center text-center rounded shadow-sm">
             <h2>{{ __('frontend.discount_25_off') }}</h2>
             <h3>{{ __('frontend.explore_world_destinations') }}</h3>
-            <a href="#" class="btn btn-sec">{{ __('frontend.book_now') }}</a>
+           <div class="d-flex justify-content-center mt-3">
+    <a href="#" class="btn btn-sec">Book Now</a>
+</div>
         </div>
     </div>
+
     <div class="col-lg-6">
-      <div class="fligtwidget">
-          <h2>{{ __('frontend.discount_25_off') }}</h2>
-          <h3>{{ __('frontend.experience_world_extraordinary') }}</h3>
-          <a href="#" class="btn btn-sec">{{ __('frontend.book_now') }}</a>
-      </div>
-  </div>
+        <div class="fligtwidget h-100 p-4 d-flex flex-column justify-content-center text-center rounded shadow-sm">
+            <h2>{{ __('frontend.discount_25_off') }}</h2>
+            <h3>{{ __('frontend.experience_world_extraordinary') }}</h3>
+           <div class="d-flex justify-content-center mt-3">
+    <a href="#" class="btn btn-sec">Book Now</a>
+</div>
+        </div>
+    </div>
+
   </div>
 </div>
 </x-app-layout>

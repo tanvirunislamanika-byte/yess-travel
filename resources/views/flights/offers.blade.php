@@ -1,6 +1,131 @@
 <x-app-layout>
     <!-- Page title start -->
+     <style>
+
+    /* FLIGHT SEARCH FORM GLASS EFFECT */
+    .duffeltopsearch{
+    background: rgba(0, 0, 0, 0.5); /* dark + 50% opacity */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+    /* Inputs */
+    .duffeltopsearch .form-control,
+    .duffeltopsearch .form-select{
+        background: rgba(255,255,255,0.75);
+        border: 1px solid rgba(255,255,255,0.35);
+        height: 50px;
+        border-radius: 12px;
+        box-shadow: none;
+    }
+.custom-placeholder::placeholder {
+    color: #ffffff !important;
+    opacity: 1;
+}
+    .duffeltopsearch .form-control:focus,
+    .duffeltopsearch .form-select:focus{
+        border-color: #0e52a5;
+        box-shadow: 0 0 0 0.15rem rgba(14,82,165,0.15);
+    }
+
+    /* Labels */
+    .duffeltopsearch label{
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #111;
+    }
+
+    /* Trip Type Buttons */
+    .tripetype{
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .tripetype .btn{
+        border-radius: 12px;
+        padding: 10px 18px;
+        font-weight: 600;
+    }
+
+    .tripetype .btn-outline-primary{
+        border-color: #0e52a5;
+        color: #0e52a5;
+    }
+
+    .tripetype .btn-check:checked + .btn{
+        background: #0e52a5;
+        border-color: #0e52a5;
+        color: #fff;
+    }
+
+    /* Buttons */
+    .btn-primary{
+        background: #0e52a5;
+        border: none;
+        border-radius: 12px;
+        height: 50px;
+        font-weight: 600;
+    }
+
+    .btn-sec{
+        border-radius: 12px;
+        font-weight: 600;
+    }
+
+    /* Hero Section */
+    .flightinthero{
+        padding: 70px 0;
+        position: relative;
+    }
+
+    .flightinthero h1{
+        text-align: center;
+        color: #fff;
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+
+    /* Mobile */
+    @media(max-width: 991px){
+
+        .duffeltopsearch{
+            padding: 20px;
+        }
+
+        .flightinthero h1{
+            font-size: 30px;
+        } 
+
+        /* INPUT WHITE-GRAY BACKGROUND */
+.single-city .form-control{
+    background: #f1f3f5;   /* white-gray */
+    border: 1px solid #e2e6ea;
+    border-radius: 10px;
+    color: #111; /* input text readable */
+}
+
+/* PLACEHOLDER STYLE */
+.single-city .form-control::placeholder{
+    color: #6c757d;
+    opacity: 1;
+}
+
+/* LABEL WHITE (if dark background used) */
+.single-city label{
+    color: #fff;
+}
+
+    }
+
+</style>
+
     <form action="{{ url('/flights/search') }}" method="GET">
+
         <div class="flightinthero">
             <div class="container">
                 <div class="row justify-content-center">
@@ -36,39 +161,67 @@
                         $slices = request('slices');
                     @endphp
 
-                    <div class="row single-city">
-                        <div class="col">
-                            <div class="mt-3">
-                                <label>From</label>
-                                <input type="text" class="form-control from_location" name="slices[0][from_location]"
-                                    id="from_location"
-                                    placeholder="{{ request('from_type') == 'code' ? 'e.g. LHR' : 'e.g. London' }}"
-                                    value="{{ $slices[0]['from_location'] ?? '' }}">
-                                <input type="hidden" name="slices[0][from]" class="from_code" id="from_code"
-                                    value="{{ $slices[0]['from'] ?? '' }}">
-                            </div>
-                        </div>
+                    <div class="row single-city  text-white g-3">
 
-                        <div class="col">
-                            <div class="mt-3">
-                                <label>To</label>
-                                <input type="text" class="form-control to_location" name="slices[0][to_location]"
-                                    id="to_location"
-                                    placeholder="{{ request('to_type') == 'code' ? 'e.g. JFK' : 'e.g. New York' }}"
-                                    value="{{ $slices[0]['to_location'] ?? '' }}">
-                                <input type="hidden" name="slices[0][to]" id="to_code" class="to_code"
-                                    value="{{ $slices[0]['to'] ?? '' }}">
-                            </div>
-                        </div>
+            <!-- FROM -->
+         <div class="col-md">
 
-                        <div class="col">
-                            <div class="mt-3">
-                                <label>Travelling On</label>
-                                <input type="text" name="slices[0][travelling_date]" id="travelling_date"
-                                    class="form-control travelling_date" placeholder="Select From Date"
-                                    value="{{ $slices[0]['travelling_date'] ?? '' }}" autocomplete="off">
-                            </div>
-                        </div>
+    <label class="text-white mb-2">
+        {{ __('frontend.from') }}
+    </label>
+
+    <input type="text"
+           class="form-control bg-transparent border-light from_location custom-placeholder text-white-input"
+           name="slices[0][from_location]"
+           id="from_location"
+           placeholder="{{ request('from_type') == 'code' ? 'e.g. LHR' : 'e.g. London' }}"
+           value="{{ $slices[0]['from_location'] ?? '' }}"
+           style="height: 50px;">
+
+    <input type="hidden"
+           name="slices[0][from]"
+           class="from_code"
+           id="from_code"
+           value="{{ $slices[0]['from'] ?? '' }}">
+
+</div>
+                       <div class="col-md">
+
+    <label class="text-white mb-2">
+        {{ __('frontend.to') }}
+    </label>
+
+    <input type="text"
+           class="form-control bg-transparent border-light to_location custom-placeholder text-white-input"
+           name="slices[0][to_location]"
+           id="to_location"
+           placeholder="{{ request('to_type') == 'code' ? 'e.g. JFK' : 'e.g. New York' }}"
+           value="{{ $slices[0]['to_location'] ?? '' }}"
+           style="height: 50px;">
+
+    <input type="hidden"
+           name="slices[0][to]"
+           id="to_code"
+           class="to_code"
+           value="{{ $slices[0]['to'] ?? '' }}">
+
+</div>
+<div class="col-md">
+
+    <label class="text-white mb-2">
+        {{ __('frontend.travelling_on') }}
+    </label>
+
+    <input type="text"
+           name="slices[0][travelling_date]"
+           id="travelling_date"
+           class="form-control bg-transparent border-light travelling_date custom-placeholder text-white-input"
+           placeholder="Select From Date"
+           value="{{ $slices[0]['travelling_date'] ?? '' }}"
+           autocomplete="off"
+           style="height: 50px;">
+
+</div>
 
 
 
@@ -109,37 +262,84 @@
 
 
                         <div class="col-md-2">
-                            <div class="mt-3">
-                                <label>Cabin Class</label>
-                                <select class="form-control" name="cabin_class">
-                                    <option value="">Any Class</option>
-                                    <option value="economy"
-                                        {{ request('cabin_class') == 'economy' ? 'selected' : '' }}>
-                                        Economy</option>
-                                    <option value="premium_economy"
-                                        {{ request('cabin_class') == 'premium_economy' ? 'selected' : '' }}>Premium
-                                        Economy</option>
-                                    <option value="business"
-                                        {{ request('cabin_class') == 'business' ? 'selected' : '' }}>Business</option>
-                                    <option value="first" {{ request('cabin_class') == 'first' ? 'selected' : '' }}>
-                                        First Class</option>
-                                </select>
-                            </div>
-                        </div>
+
+    <label class="text-white mb-2">
+        {{ __('frontend.cabin_class') }}
+    </label>
+
+    <select class="form-control bg-transparent border-light text-white-input"
+            name="cabin_class"
+            style="height: 50px;">
+
+        <option value="" class="text-dark">
+            {{ __('frontend.any_class') }}
+        </option>
+
+        <option value="economy" class="text-dark"
+            {{ request('cabin_class') == 'economy' ? 'selected' : '' }}>
+            {{ __('frontend.economy') }}
+        </option>
+
+        <option value="premium_economy" class="text-dark"
+            {{ request('cabin_class') == 'premium_economy' ? 'selected' : '' }}>
+            {{ __('frontend.premium_economy') }}
+        </option>
+
+        <option value="business" class="text-dark"
+            {{ request('cabin_class') == 'business' ? 'selected' : '' }}>
+            {{ __('frontend.business') }}
+        </option>
+
+        <option value="first" class="text-dark"
+            {{ request('cabin_class') == 'first' ? 'selected' : '' }}>
+            {{ __('frontend.first_class') }}
+        </option>
+
+    </select>
+
+</div>
                         <div class="col-md-2">
-                            <div class="mt-3">
-                                <label>Adults</label>
-                                <input type="number" class="form-control" name="adults" min="1"
-                                    max="9" value="{{ request('adults', 1) }}">
-                            </div>
-                        </div>
+
+    <label class="text-white mb-2">
+        {{ __('frontend.adults') }}
+    </label>
+
+    <input type="number"
+           class="form-control bg-transparent border-light adults-input"
+           name="adults"
+           min="1"
+           max="9"
+           value="{{ request('adults', 1) }}"
+           style="height: 50px;">
+
+</div>
+
+<style>
+    .adults-input {
+        color: #fff !important;
+    }
+</style>
                         <div class="col-md-2">
-                            <div class="mt-3">
-                                <label>Children</label>
-                                <input type="number" class="form-control" name="children" min="0"
-                                    max="9" value="{{ request('children', 0) }}">
-                            </div>
-                        </div>
+
+    <label class="text-white mb-2">
+        {{ __('frontend.children') }}
+    </label>
+
+    <input type="number"
+           class="form-control bg-transparent border-light children-input"
+           name="children"
+           min="0"
+           max="9"
+           value="{{ request('children', 0) }}"
+           style="height: 50px;">
+
+</div>
+
+<style>
+    .children-input {
+        color: #fff !important;
+    }
+</style>
                         <div class="col-md-2 ms-auto text-right mt-3"><label>&nbsp;</label> <button
                                 class="btn btn-primary d-block w-100">Search</button></div>
                     </div>
@@ -362,46 +562,85 @@
 
                 @if (null !== ($arilines = moduleF(4)))
         <!-- Popular Flights -->
-        <div class="popflights pt-5">
-            <div class="container">              
-                <ul class="row topaircompany">
-                    @foreach ($arilines as $airline)
-                        <li class="col-4 col-lg mb-3">
-                            <div class="arilinebox">
-                            <img src="{{ asset('images/' . $airline->image) }}">
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+        <div class="popflights pt-5" style="background: #fffaf0;">
+    <div class="container">
+
+        <ul class="row topaircompany">
+
+            @foreach ($arilines as $airline)
+                <li class="col-4 col-lg mb-3">
+
+                    <div class="arilinebox bg-white p-2 rounded shadow-sm d-flex align-items-center justify-content-center"
+                         style="height: 80px;">
+
+                        <img src="{{ asset('images/' . $airline->image) }}"
+                             class="img-fluid"
+                             style="max-height: 50px; object-fit: contain;">
+
+                    </div>
+
+                </li>
+            @endforeach
+
+        </ul>
+
+    </div>
+</div>
         </div>
     @endif
 
 
 
                 <!-- Widgets -->
-                <div class="container pt-5">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <?php $widget = widget(5); ?>
-                            <?php $img = asset('images/' . $widget->extra_image_1); ?>
-                            <div class="hotelwidget" style="background: url({{ $img }}) no-repeat;">
-                                <h2>{{ $widget->extra_field_1 }}</h2>
-                                <h3>{{ $widget->description }}</h3>
-                                <a href="#" class="btn btn-sec">Book Now</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <?php $widget = widget(6); ?>
-                            <?php $img = asset('images/' . $widget->extra_image_1); ?>
-                            <div class="hotelwidget" style="background: url({{ $img }}) no-repeat;">
-                                <h2>{{ $widget->extra_field_1 }}</h2>
-                                <h3>{{ $widget->description }}</h3>
-                                <a href="#" class="btn btn-sec">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="container pt-5">
+    <div class="row g-1 justify-content-center">
+
+        <div class="col-lg-6 d-flex justify-content-center">
+
+            <?php $widget = widget(5); ?>
+            <?php $img = asset('images/' . $widget->extra_image_1); ?>
+
+            <div class="hotelwidget p-3 rounded shadow-sm w-100"
+                 style="background: url({{ $img }}) no-repeat center/cover; height: 220px; max-width: 520px;">
+
+                <h2 class="fs-5 mb-1">{{ $widget->extra_field_1 }}</h2>
+
+                <h3 class="fs-6 mb-2 lh-sm">
+                    {{ $widget->description }}
+                </h3>
+
+                <a href="#" class="btn btn-sec btn-sm px-3 py-1">
+                    Book Now
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 d-flex justify-content-center">
+
+            <?php $widget = widget(6); ?>
+            <?php $img = asset('images/' . $widget->extra_image_1); ?>
+
+            <div class="hotelwidget p-3 rounded shadow-sm w-100"
+                 style="background: url({{ $img }}) no-repeat center/cover; height: 220px; max-width: 520px;">
+
+                <h2 class="fs-5 mb-1">{{ $widget->extra_field_1 }}</h2>
+
+                <h3 class="fs-6 mb-2 lh-sm">
+                    {{ $widget->description }}
+                </h3>
+
+                <a href="#" class="btn btn-sec btn-sm px-3 py-1">
+                    Book Now
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
             </div>
         </div>
     </form>
