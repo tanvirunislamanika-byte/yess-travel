@@ -5,23 +5,9 @@
            
                     <div class="hero-content">
                         <div class="row">
-                            <div class="col-lg-7">
+                            <div class="col-lg-12">
                             <h1 class="hero-title">{{ __('frontend.discover_amazing_tours') }}</h1>
                             <p class="hero-subtitle">{{ __('frontend.explore_destinations_subtitle') }}</p>
-                            </div>
-                            <div class="col-lg-5">
-                            <div class="hero-search">
-                            <form method="GET" action="{{ route('tours.list') }}" class="search-form">
-                                <div class="search-input-group">
-                                    <i class="fas fa-search search-icon"></i>
-                                    <input type="text" name="keyword" placeholder="{{ __('frontend.search_tours_destinations') }}" value="{{ request('keyword') }}" class="search-input">
-                                    <button type="submit" class="search-button">
-                                        <span>{{ __('frontend.search') }}</span>
-                                        <i class="fas fa-arrow-right"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div> 
                             </div>
                         </div>
                        
@@ -95,6 +81,20 @@
     <!-- Tours Grid Section -->
     <section class="tours-grid-section">
         <div class="container">
+            <!-- Search Section -->
+            <div class="search-section mb-4">
+                <form method="GET" action="{{ route('tours.list') }}" class="search-form">
+                    <div class="search-input-group">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" name="keyword" placeholder="{{ __('frontend.search_tours_destinations') }}" value="{{ request('keyword') }}" class="search-input">
+                        <button type="submit" class="search-button">
+                            <span>{{ __('frontend.search') }}</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
             <!-- Results Header -->
             <div class="results-header">
                 <div class="row align-items-center">

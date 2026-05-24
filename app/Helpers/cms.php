@@ -679,6 +679,18 @@ if (! function_exists('widgetPage')) {
         return $array;
     }
 }  
+
+if (! function_exists('asset_image_versioned')) {
+    function asset_image_versioned($filename)
+    {
+        $path = public_path('images/' . $filename);
+        if ($filename && file_exists($path)) {
+            return asset('images/' . $filename) . '?v=' . filemtime($path);
+        }
+        return asset('images/' . $filename);
+    }
+}
+
 if (! function_exists('dropdown')) {
     /**
      * Assign high numeric IDs to a config item to force appending.

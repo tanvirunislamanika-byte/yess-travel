@@ -1,8 +1,8 @@
 <x-app-layout>
     <!-- Page title start -->
-<div class="pageheader">            
+<div class="pageheader" style="background: url('{{ asset('images/hotel/imag.jpg') }}') no-repeat center center; background-size: cover;">
     <div class="container">
-        <h1>{{ __('frontend.discover_your_next_adventure') }}</h1>
+        <h1 style="color: #000;">{{ __('frontend.discover_your_next_adventure') }}</h1>
     </div>
 </div>
 <!-- Page title end -->

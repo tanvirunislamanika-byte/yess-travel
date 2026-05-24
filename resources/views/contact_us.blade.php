@@ -3,9 +3,9 @@
 <!-- Inner Heading Start -->
 
 <!-- Page title start -->
-<div class="pageheader">            
+<div class="pageheader" style="background: url('{{ asset('images/contact/tropical-beach-scene-with-palm-trees-blue-ocean.jpg') }}') no-repeat center center; background-size: cover;">            
     <div class="container">
-        <h1>{{__('Contact Us')}}</h1>
+        <h1 style="color: #000;">{{__('Contact Us')}}</h1>
     </div>
 </div>
 <!-- Page title end -->

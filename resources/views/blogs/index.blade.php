@@ -1,7 +1,7 @@
 <x-app-layout>
 
 <!-- Page title start -->
-<div class="pageheader">            
+<div class="pageheader" style="background: url('{{ asset('images/blog/blog.jpg') }}') no-repeat center center; background-size: cover;">            
     <div class="container">
         <h1>{{__('Latest From Blog')}}</h1>
     </div>

@@ -4,7 +4,7 @@
 <!-- Inner Heading Start -->
 
 
-<div class="pageheader"">            
+<div class="pageheader" style="background: url('{{ asset('images/background/background.jpg') }}') no-repeat center center; background-size: cover;">
             <div class="container">            
                 <h1>{{$cms->getTranslatedTitle()}}</h1>
             </div>

@@ -32,6 +32,15 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <!-- Main css -->
         <link rel="stylesheet" href="{{asset('css/style.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <style>
+            html, body, input, textarea, select, button, a, p, span, div, h1, h2, h3, h4, h5, h6 {
+                font-family: 'Poppins', sans-serif !important;
+            }
+        </style>
         
         <!-- RTL CSS for RTL languages -->
         @php

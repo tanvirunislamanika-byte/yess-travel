@@ -12,7 +12,7 @@
 }
         </style>
 
-<div class="pageheader">            
+<div class="pageheader" style="background: url('{{ asset('images/service/eiffel-tower-view.jpg') }}') no-repeat center center; background-size: cover;">            
             <div class="container">
             <?php $widget =widget(19); ?>
                 <h1>Our Services</h1>

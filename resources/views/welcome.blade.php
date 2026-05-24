@@ -1,6 +1,6 @@
 <x-app-layout>
     <?php $widget = widget(31); ?>
-    <?php $img = asset('images/' . $widget->extra_image_1); ?>
+    <?php $img = asset_image_versioned($widget->extra_image_1); ?>
     <div id="home" class="parallax-section" style="background: url({{ $img }}) no-repeat;">
         <!--     <div class="overlay"></div>-->
         <div class="container">
@@ -416,7 +416,7 @@
 
         <div class="col-lg-5">
             <?php $widget = widget(5); ?>
-            <?php $img = asset('images/' . $widget->extra_image_1); ?>
+            <?php $img = asset_image_versioned($widget->extra_image_1); ?>
 
             <div class="hotelwidget small-widget"
                  style="background: url({{ $img }}) no-repeat center center/cover;">
@@ -432,7 +432,7 @@
 
         <div class="col-lg-5">
             <?php $widget = widget(6); ?>
-            <?php $img = asset('images/' . $widget->extra_image_1); ?>
+            <?php $img = asset_image_versioned($widget->extra_image_1); ?>
 
             <div class="hotelwidget small-widget"
                  style="background: url({{ $img }}) no-repeat center center/cover;">

@@ -200,17 +200,6 @@
     <!-- Charts Row -->
     <div class="row g-4">
  
-      <!-- Daily Bookings -->
-      <div class="col-md-6">
-        <div class="card shadow-sm rounded-3 h-100">
-          <div class="card-body p-4">
-            <h6 class="fw-semibold mb-3">Daily Bookings</h6>
-            <div class="chart-wrapper">
-              <canvas id="dailyBookingsChart"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
  
       <!-- Revenue Distribution -->
       <div class="col-md-6">
@@ -230,138 +219,20 @@
           </div>
         </div>
       </div>
- 
+
+      <!-- Daily Bookings -->
+      <div class="col-md-6">
+        <div class="card shadow-sm rounded-3 h-100">
+          <div class="card-body p-4">
+            <h6 class="fw-semibold mb-3">Daily Bookings</h6>
+            <div class="chart-wrapper">
+              <canvas id="dailyBookingsChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
- 
-  <script>
-    // ── Revenue Bar Chart ──────────────────────────────────────
-    const allMonths  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const allRevenue = [5200, 6100, 5800, 7400, 6900, 8100, 7600, 9200, 8400, 10100, 9600, 9800];
- 
-    const revCtx = document.getElementById('revenueChart').getContext('2d');
-    const revChart = new Chart(revCtx, {
-      type: 'bar',
-      data: {
-        labels: allMonths,
-        datasets: [{
-          label: 'Revenue',
-          data: allRevenue,
-          backgroundColor: '#B5D4F4',
-          borderColor: '#378ADD',
-          borderWidth: 1.5,
-          borderRadius: 5,
-          hoverBackgroundColor: '#378ADD'
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { display: false }, ticks: { font: { size: 11 } } },
-          y: {
-            grid: { color: 'rgba(0,0,0,0.06)' },
-            ticks: {
-              callback: v => '$' + (v / 1000).toFixed(0) + 'k',
-              font: { size: 11 }
-            }
-          }
-        }
-      }
-    });
- 
-    function updateRevChart(months) {
-      const n      = parseInt(months);
-      const labels = allMonths.slice(-n);
-      const data   = allRevenue.slice(-n);
-      revChart.data.labels              = labels;
-      revChart.data.datasets[0].data   = data;
-      revChart.update();
-      const total = data.reduce((a, b) => a + b, 0);
-      document.getElementById('totalRev').textContent = '$' + total.toLocaleString();
-      document.getElementById('avgRev').textContent   = '$' + Math.round(total / n).toLocaleString();
-    }
- 
-    document.getElementById('revenuePeriod').addEventListener('change', e => updateRevChart(e.target.value));
- 
-    // ── Daily Bookings Line Chart ──────────────────────────────
-    const days     = Array.from({ length: 14 }, (_, i) => {
-      const d = new Date();
-      d.setDate(d.getDate() - 13 + i);
-      return d.toLocaleDateString('en', { month: 'short', day: 'numeric' });
-    });
-    const bookings = [12, 18, 9, 22, 15, 28, 19, 31, 24, 17, 26, 33, 21, 29];
- 
-    new Chart(document.getElementById('dailyBookingsChart').getContext('2d'), {
-      type: 'line',
-      data: {
-        labels: days,
-        datasets: [{
-          label: 'Bookings',
-          data: bookings,
-          borderColor: '#1D9E75',
-          backgroundColor: 'rgba(29,158,117,0.08)',
-          borderWidth: 2,
-          pointBackgroundColor: '#1D9E75',
-          pointRadius: 3,
-          fill: true,
-          tension: 0.4
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { display: false }, ticks: { maxTicksLimit: 7, font: { size: 10 } } },
-          y: { grid: { color: 'rgba(0,0,0,0.06)' }, ticks: { font: { size: 11 } } }
-        }
-      }
-    });
- 
-    // ── Revenue Distribution Doughnut Chart ───────────────────
-    const pieColors = ['#378ADD', '#1D9E75', '#D85A30', '#BA7517'];
-    const pieLabels = ['Hotels', 'Flights', 'Tours', 'Car Hire'];
-    const pieData   = [38, 27, 22, 13];
- 
-    new Chart(document.getElementById('revenuePieChart').getContext('2d'), {
-      type: 'doughnut',
-      data: {
-        labels: pieLabels,
-        datasets: [{
-          data: pieData,
-          backgroundColor: pieColors,
-          borderWidth: 0,
-          hoverOffset: 6
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '68%',
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%' } }
-        }
-      }
-    });
- 
-    // Pie legend
-    const legendEl = document.getElementById('pieLegend');
-    pieLabels.forEach((label, i) => {
-      legendEl.innerHTML += `
-        <div class="d-flex align-items-center gap-2">
-          <span class="pie-legend-dot" style="background:${pieColors[i]};"></span>
-          <span style="font-size:12px; color:#6c757d;">${label}</span>
-          <span style="font-size:12px; font-weight:600; color:#1a1a2e; margin-left:auto;">${pieData[i]}%</span>
-        </div>`;
-    });
-  </script>
 
-           
-
-            <!-- Latest Flight Orders -->
             <div class="row mb-6">
                 <div class="col-lg-12">
             <div class="bg-white overflow-hidden shadow-sm rounded-lg mb-6">
@@ -613,33 +484,45 @@
         // Revenue Chart with dropdown functionality
         const revenueCtx = document.getElementById('revenueChart').getContext('2d');
         let revenueChart = new Chart(revenueCtx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: @json($months),
                 datasets: [
                     {
                         label: 'Hotels',
                         data: @json($hotelRevenue),
-                        borderColor: 'rgb(59, 130, 246)',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                        tension: 0.4,
-                        fill: true
+                        backgroundColor: '#378ADD',
+                        borderColor: '#378ADD',
+                        borderWidth: 0,
+                        borderRadius: 0,
+                        borderSkipped: false,
+                        barPercentage: 0.82,
+                        categoryPercentage: 0.72,
+                        maxBarThickness: 32
                     },
                     {
                         label: 'Flights',
                         data: @json($flightRevenue),
-                        borderColor: 'rgb(239, 68, 68)',
-                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                        tension: 0.4,
-                        fill: true
+                        backgroundColor: '#1D9E75',
+                        borderColor: '#1D9E75',
+                        borderWidth: 0,
+                        borderRadius: 0,
+                        borderSkipped: false,
+                        barPercentage: 0.82,
+                        categoryPercentage: 0.72,
+                        maxBarThickness: 32
                     },
                     {
                         label: 'Tours',
                         data: @json($tourRevenue),
-                        borderColor: 'rgb(147, 51, 234)',
-                        backgroundColor: 'rgba(147, 51, 234, 0.1)',
-                        tension: 0.4,
-                        fill: true
+                        backgroundColor: '#D85A30',
+                        borderColor: '#D85A30',
+                        borderWidth: 0,
+                        borderRadius: 0,
+                        borderSkipped: false,
+                        barPercentage: 0.82,
+                        categoryPercentage: 0.72,
+                        maxBarThickness: 32
                     }
                 ]
             },
@@ -649,37 +532,41 @@
                 plugins: {
                     legend: {
                         position: 'top',
+                        labels: { boxWidth: 12, padding: 16 }
                     },
-                    title: {
-                        display: false
-                    }
+                    title: { display: false }
                 },
                 scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { size: 11 } },
+                        stacked: false,
+                        barPercentage: 0.82,
+                        categoryPercentage: 0.72
+                    },
                     y: {
                         beginAtZero: true,
+                        grid: { color: 'rgba(0,0,0,0.06)' },
                         ticks: {
                             callback: function(value) {
                                 return '{{ $currencySymbol }}' + value.toLocaleString();
-                            }
+                            },
+                            font: { size: 11 }
                         }
                     }
                 }
             }
         });
 
-        // Handle dropdown change
         document.getElementById('revenuePeriod').addEventListener('change', function() {
             const selectedPeriod = parseInt(this.value);
             const data = chartData[selectedPeriod];
             
             if (data) {
-                // Update chart data
                 revenueChart.data.labels = data.months;
                 revenueChart.data.datasets[0].data = data.hotelRevenue;
                 revenueChart.data.datasets[1].data = data.flightRevenue;
                 revenueChart.data.datasets[2].data = data.tourRevenue;
-                
-                // Update chart
                 revenueChart.update();
             }
         });
@@ -694,23 +581,38 @@
                     {
                         label: 'Hotels',
                         data: @json($dailyHotelBookings),
-                        backgroundColor: 'rgba(147, 51, 234, 0.8)',
-                        borderColor: 'rgb(147, 51, 234)',
-                        borderWidth: 1
+                        backgroundColor: '#378ADD',
+                        borderColor: '#378ADD',
+                        borderWidth: 0,
+                        borderRadius: 4,
+                        borderSkipped: false,
+                        barPercentage: 0.75,
+                        categoryPercentage: 0.7,
+                        maxBarThickness: 20
                     },
                     {
                         label: 'Flights',
                         data: @json($dailyFlightBookings),
-                        backgroundColor: 'rgba(239, 68, 68, 0.8)',
-                        borderColor: 'rgb(239, 68, 68)',
-                        borderWidth: 1
+                        backgroundColor: '#1D9E75',
+                        borderColor: '#1D9E75',
+                        borderWidth: 0,
+                        borderRadius: 4,
+                        borderSkipped: false,
+                        barPercentage: 0.75,
+                        categoryPercentage: 0.7,
+                        maxBarThickness: 20
                     },
                     {
                         label: 'Tours',
                         data: @json($dailyTourBookings),
-                        backgroundColor: 'rgba(245, 101, 101, 0.8)',
-                        borderColor: 'rgb(245, 101, 101)',
-                        borderWidth: 1
+                        backgroundColor: '#D85A30',
+                        borderColor: '#D85A30',
+                        borderWidth: 0,
+                        borderRadius: 4,
+                        borderSkipped: false,
+                        barPercentage: 0.75,
+                        categoryPercentage: 0.7,
+                        maxBarThickness: 20
                     }
                 ]
             },
@@ -720,26 +622,20 @@
                 plugins: {
                     legend: {
                         position: 'top',
-                    },
-                    title: {
-                        display: false
+                        labels: { boxWidth: 12, padding: 16 }
                     }
                 },
                 scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 1
-                        }
-                    }
+                    x: { grid: { display: false }, ticks: { maxTicksLimit: 7, font: { size: 10 } } },
+                    y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.06)' }, ticks: { font: { size: 11 } } }
                 }
             }
         });
 
-        // Revenue Distribution Pie Chart
+        // Revenue Distribution Doughnut
         const revenuePieCtx = document.getElementById('revenuePieChart').getContext('2d');
         new Chart(revenuePieCtx, {
-            type: 'pie',
+            type: 'doughnut',
             data: {
                 labels: ['Hotels', 'Flights', 'Tours'],
                 datasets: [{
@@ -748,32 +644,25 @@
                         {{ array_sum($flightRevenue) }},
                         {{ array_sum($tourRevenue) }}
                     ],
-                    backgroundColor: [
-                        'rgba(91, 51, 234, 0.8)',
-                        'rgba(239, 68, 68, 0.8)',
-                        'rgba(27, 228, 87, 0.8)'
-                    ],
-                    borderColor: [
-                        'rgb(91, 51, 234)',
-                        'rgb(239, 68, 68)',
-                        'rgb(27, 228, 87)'
-                    ],
-                    borderWidth: 2
+                    backgroundColor: ['#378ADD', '#1D9E75', '#D85A30'],
+                    borderColor: '#ffffff',
+                    borderWidth: 2,
+                    hoverOffset: 10
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                cutout: '72%',
                 plugins: {
-                    legend: {
-                        position: 'bottom',
-                    },
+                    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12 } },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
                                 const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                const percentage = ((context.parsed / total) * 100).toFixed(1);
-                                return context.label + ': ' + '{{ $currencySymbol }}' + context.parsed.toLocaleString() + ' (' + percentage + '%)';
+                                const value = context.parsed;
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return context.label + ': ' + '{{ $currencySymbol }}' + value.toLocaleString() + ' (' + percentage + '%)';
                             }
                         }
                     }

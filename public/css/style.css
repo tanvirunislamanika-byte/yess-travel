@@ -10421,7 +10421,7 @@ select{appearance: auto;}
 }
 
 .search-button {
-    background:linear-gradient(45deg, #f8b93a, #db9916);
+    background:linear-gradient(45deg, #0e52a5, #1e5fc1);
     color: white;
     border: none;
     padding: 18px 30px;
@@ -10434,7 +10434,7 @@ select{appearance: auto;}
 }
 
 .search-button:hover {
-    background: linear-gradient(45deg, #db9916, #f8b93a);
+    background: linear-gradient(45deg, #1e5fc1, #0e52a5);
     transform: translateX(5px);
 }
 
